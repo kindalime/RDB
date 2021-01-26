@@ -1,0 +1,260 @@
+.top-padding{
+    overflow-x: auto;
+    text-align: center;
+    padding: 0px 0;
+
+}
+.mid-padding{
+    overflow-x: auto;
+    text-align: center;
+    padding: 10px 30px;
+
+}
+.center-padding{
+    overflow-x: auto;
+    text-align: center;
+    padding: 150px 0;
+
+}
+
+/* "float-container" and "float-child" fix buttons on index*/
+.float-container {
+    border: 3px solid #fff;
+    padding: 20px;
+}
+
+.float-child {
+    width: 50%;
+    float: left;
+    padding: 20px;
+}
+
+.float-child2 {
+    width: 90%;
+    float: left;
+    padding: 0px;
+}
+
+.float-child3 {
+    width: 10%;
+    float: left;
+    padding: 0px;
+}
+
+.buttonblue:hover {
+    background-color: #0f4d92;
+}
+
+.topnav {
+    background-color: #0f4d92;
+}
+
+.topnavtext {
+    color: white;
+}
+
+.bottomnav {
+    background-color: #0f4d92;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    overflow: hidden;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    font-family: "YaleNew", Roman;
+}
+
+ /* "body" and "html" fix nav to bottom */
+body {
+  margin-bottom: 60px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.header1{
+    font-size: 60px;
+    font-family: "YaleNew", Roman;
+}
+
+.header2{
+    font-size: 40px;
+    font-family: "YaleNew", Roman;
+}
+
+.header3{
+    font-size: 30px;
+    font-family: "YaleNew", Roman;
+}
+
+.header4{
+    font-size: 15px;
+    font-family: "YaleNew", Roman;
+}
+
+.body1{
+    font-size: 25px;
+    font-family: Verdana, sans-serif;
+}
+
+.body2{
+    font-size: 17px;
+    font-family: Verdana, sans-serif;
+}
+
+.body3{
+    font-size: 15px;
+    font-family: Verdana, sans-serif;
+}
+
+.body4{
+    font-size: 10px;
+    font-family: Verdana, sans-serif;
+}
+
+.font1{
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.aboutdiv{
+    max-width: 70%;
+    margin: auto;
+}
+
+
+.left{
+        text-align: left;
+}
+
+.right{
+        text-align: right;
+}
+
+.blue1{
+      border-top: 1px solid #0f4d92;
+      width:50%;
+      text-align:left;
+      margin-left:0
+}
+
+/* toggle switch */
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.space1 {
+  height: 200px;
+  width: 50%;
+  background-color: white;
+}
+
+.space1 {
+  height: 50px;
+  width: 50%;
+  background-color: white;
+}
+
+textarea {
+      resize: none;
+      width: 100%;
+      height: 300px;
+}
+
+#search {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#search td, #search th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#search tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+#search tr:hover {
+    background-color: #ddd;
+}
+
+#search th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #0f4d92;
+  color: white;
+}
+
+#go {
+    text-align: center;
+    font-family: "YaleNew", Roman;
+    font-size: 20px;
+    padding: 10px;
+    vertical-align: central;
+}

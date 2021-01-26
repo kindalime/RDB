@@ -1,0 +1,4 @@
+Django
+django-cas-ng
+psycopg2
+gunicorn

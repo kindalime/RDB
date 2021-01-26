@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+<body class="w3-animate-opacity top-padding">
+<div class="center-padding">
+    <img src="/static/RDBLogo.png" alt="RDB logo" style="width:40%;">
+    <p class="header2">Powered by YURA</p>
+    {% if request.user.is_authenticated %}
+    <p>Welcome to RDB</p><p>You logged in as {{ request.user }}.</p><p><a href="/accounts/logout">Logout</a></p>
+    {% else %}
+    <div class="float-container">
+        <div class="float-child">
+            <a href="/accounts/login"><button type="button" id="students" class="btn btn-outline-secondary btn-lg btn-block rounded-0 buttonblue">Student Login</button></a>
+        </div>
+        <div class="float-child">
+            <button type="button" id="faculty" class="btn btn-outline-secondary btn-lg btn-block rounded-0 buttonblue">Faculty Login</button>
+        </div>
+    </div>
+    {% endif %}
+</div>
+</body>
+{% endblock %}
