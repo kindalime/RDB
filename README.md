@@ -16,7 +16,7 @@ If this section is here, there is currently a free remote database hooked up to 
 To make sure you're using the correct python version, and to promote best practices please follow the tutorial [here](https://github.com/pyenv/pyenv/blob/master/README.md) to install pyenv (if you already have python3 installed, feel free to skip).
 
 1. Clone the repo
-`git clone https://github.com/DanielKim0/RDB.git
+`git clone https://github.com/DanielKim0/RDB.git`
 2. Change directories and create virtual python environment
 `cd RDB && python -m venv .env`
 3. Source environment
