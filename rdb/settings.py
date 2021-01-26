@@ -48,13 +48,13 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app.apps.AppConfig',
     'django_cas_ng',
 ]
 
@@ -141,9 +141,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 CAS_SERVER_URL = 'https://secure.its.yale.edu/cas/'
+CAS_IGNORE_REFERER = True
 CAS_LOGOUT_COMPLETELY = False
 CAS_VERSION = '3'
 
+LOGIN_URL="/accounts/login/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

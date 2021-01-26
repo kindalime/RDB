@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Lab
 
 def index(request):
@@ -13,14 +14,14 @@ def about(request):
 def contact(request):
     return render(request, "contact.html")
 
-class LabCreate(CreateView):
+class LabCreate(LoginRequiredMixin, CreateView):
     model = Lab
     fields = '__all__'
 
-class LabUpdate(UpdateView):
+class LabUpdate(LoginRequiredMixin, UpdateView):
     model = Lab
     fields = '__all__'
 
-class LabDelete(DeleteView):
+class LabDelete(LoginRequiredMixin, DeleteView):
     model = Lab
     success_url = reverse_lazy('labs')
