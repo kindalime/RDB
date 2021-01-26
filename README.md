@@ -1,6 +1,6 @@
 # RDB
 
-[![Python Versions](https://www.python.org/downloads/release/python-386)](https://pypi.python.org/pypi/yt2mp3/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/yt2mp3.svg)](https://www.python.org/downloads/release/python-386/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
  
 Search through 1400+ Yale faculty listings across 60+ fields of study. Learn about professors who share your research interests and find potential research mentors.
