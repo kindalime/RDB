@@ -19,27 +19,7 @@
 </head>
 <body>
     <!-- top navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark topnav">
-        <a class="navbar-brand" href="/">RDB</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
-                </li>
-                {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/accounts/logout">Logout</a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
+        {% include 'components/navbar.html'%}
 
     <main>
         {% block content %}
@@ -47,9 +27,6 @@
     </main>
 
     <!-- bottom bar -->
-    <div class="navbar bottomnav">
-        <p>Copyright &#169 2021 Yale Undergraduate Research Association &#8226 All rights reserved</p>
-        <p>yura@yale.edu</p>
-      </div>
+        {% include 'components/footer.html'%}
 </body>
 </html>
