@@ -29,4 +29,10 @@ urlpatterns = [
     path('accounts/logout', django_cas_ng.views.LogoutView.as_view(), name='cas_ng_logout'),
 ]
 
+urlpatterns += [
+    path('lab/create/', views.LabCreate.as_view(), name='lab-create'),
+    path('lab/<int:pk>/update/', views.LabUpdate.as_view(), name='lab-update'),
+    path('lab/<int:pk>/delete/', views.LabDelete.as_view(), name='lab-delete'),
+]
+
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
