@@ -1,6 +1,6 @@
 # RDB
 
-[![PyPi](https://img.shields.io/pypi/v/django.svg)](https://pypi.org/pypi/django/)
+[![PyPi](https://img.shields.io/badge/pypi-v21.0-blue)](https://pypi.org/pypi/django/)
 [![Python](https://img.shields.io/pypi/pyversions/django.svg)](https://pypi.org/pypi/django/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Status](https://img.shields.io/pypi/status/django.svg)](https://pypi.org/pypi/django/)
