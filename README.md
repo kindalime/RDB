@@ -15,7 +15,7 @@ If this section is here, there is currently a free remote database hooked up to 
  
 ## macOS Setup
 
-To make sure you're using the correct python version, and to promote best practices please follow the tutorial [here](https://github.com/pyenv/pyenv/blob/master/README.md) to install pyenv (if you already have python3 installed, feel free to skip).
+To make sure you're using the correct python version and to promote best practices, please follow the tutorial [here](https://github.com/pyenv/pyenv/blob/master/README.md) to install pyenv (if you already have python3 installed, feel free to skip).
 
 1. Clone the repo
 `git clone https://github.com/DanielKim0/RDB.git`
@@ -23,9 +23,9 @@ To make sure you're using the correct python version, and to promote best practi
 `cd RDB && python -m venv .env`
 3. Source environment
 `source .env/bin/activate`
-3. Install requirements
+4. Install requirements
 `pip install -r requirements.txt`
-3. Run server
+5. Run server
 `python manage.py runserver`
 
 ## Windows Setup
