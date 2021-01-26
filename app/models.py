@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Lab(models.Model):
     """A typical class defining a model, derived from the Model class."""
@@ -28,9 +29,12 @@ class Lab(models.Model):
 
     # Methods
     def get_absolute_url(self):
-        """Returns the url to access a particular instance of MyModelName."""
-        return reverse('model-detail-view', args=[str(self.id)])
+        """Returns the url to access a particular instance of Lab."""
+        return reverse('lab-detail', args=[str(self.id)])
+
+    def get_fields(self):
+        return [(field.verbose_name, field.value_from_object(self)) for field in self.__class__._meta.fields]
 
     def __str__(self):
-        """String for representing the MyModelName object (in Admin site etc.)."""
+        """String for representing the Lab object (in Admin site etc.)."""
         return self.name

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Lab Form{% endblock %}
+
+{% block content %}
+<table>
+
+    {% csrf_token %} 
+    
+    {% for label, value in object.get_fields %}
+        <tr>
+            <td>{{ label }}</td>
+            <td>{{ value }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

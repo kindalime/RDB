@@ -30,6 +30,7 @@ urlpatterns = [
 ]
 
 urlpatterns += [
+    path('lab/<int:pk>', views.LabDetail.as_view(), name='lab-detail'),
     path('lab/create/', views.LabCreate.as_view(), name='lab-create'),
     path('lab/<int:pk>/update/', views.LabUpdate.as_view(), name='lab-update'),
     path('lab/<int:pk>/delete/', views.LabDelete.as_view(), name='lab-delete'),

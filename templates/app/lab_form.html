@@ -3,7 +3,7 @@
 {% block title %}Lab Form{% endblock %}
 
 {% block content %}
-<body class="w3-animate-opacity top-padding">
+<!-- <body class="w3-animate-opacity top-padding">
 <div class="mid-padding left">
     <div class="header2">
         <p>Lab Name: <input name="name" type="text" autocomplete="off"></p>
@@ -38,14 +38,13 @@
             </div>
         </div>
         <div class="float-child right">
-            <!-- Rounded switch -->
+           
             <label class="switch">
                 <input id="slider" type="checkbox">
                 <span class="slider round"></span>
             </label>
             <p id="status">Not Accepting New Undergraduates</p>
             <script>
-                // switch text below slider depending on slider position //
                 function change()
                 {
                     if (document.getElementById("status").innerHTML == "Not Accepting New Undergraduates") {
@@ -90,5 +89,13 @@
         </div>
     </div>
 </div>
-</body>
+</body> -->
+<form method="POST" enctype="multipart/form-data"> 
+  
+    {% csrf_token %} 
+  
+    {{ form.as_p }} 
+      
+    <input type="submit" value="Submit">
+</form>
 {% endblock %}
