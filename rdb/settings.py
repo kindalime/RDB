@@ -101,10 +101,10 @@ WSGI_APPLICATION = 'rdb.wsgi.application'
 DATABASES = {
  'default': {
      'ENGINE': 'django.db.backends.postgresql_psycopg2',
-     'NAME': 'erursrdk',
-     'USER': 'erursrdk',
+     'NAME': 'd2tao0u786rtog',
+     'USER': 'xkyxldleblpvmy',
      'PASSWORD': get_secret('DB_PASSWORD'),
-     'HOST': 'ziggy.db.elephantsql.com',
+     'HOST': 'ec2-50-19-95-77.compute-1.amazonaws.com',
      'PORT': '5432',
  }
 }
