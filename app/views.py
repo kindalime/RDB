@@ -27,15 +27,17 @@ def search(request):
     response_data = [
         {
             'rank': lab.rank,
+            'name': lab.name,
             'description': lab.project_desc,
             'url': lab.get_absolute_url(),
         } for lab in labs
     ]
 
-    return HttpResponse(
-        json.dumps(response_data), 
-        content_type='application/json',
-    )
+    return render(request, 'search.html', {'response_data': response_data})
+
+def lucky(request):
+    return render(request, 'search.html', {'response_data':  [Lab.objects.order_by('?').first(), ]})
+
 
 class LabDetail(LoginRequiredMixin, DetailView):
     model = Lab

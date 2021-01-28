@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+<ul>
+    {% csrf_token %}
+
+    {% if not response_data %}
+      <li>
+        No results found
+      </li>
+    {% else %}
+      {% for lab in response_data %}
+        <li>
+          {{ lab.name }} - {{ lab.description }}
+        </li>
+      {% endfor %}
+    {% endif %}
+</ul>
+{% endblock %}
