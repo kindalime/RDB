@@ -42,6 +42,7 @@ ALLOWED_HOSTS = [
     'secure.its.yale.edu',
     'localhost',
     '127.0.0.1',
+    '*',
 ]
 
 
