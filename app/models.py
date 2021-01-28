@@ -1,5 +1,8 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.postgres.search import SearchVectorField
+from django.contrib.postgres.search import SearchVector
+from .managers import LabManager
 
 class Lab(models.Model):
     """A typical class defining a model, derived from the Model class."""
@@ -22,10 +25,21 @@ class Lab(models.Model):
     mentors = models.BooleanField(help_text="")
     funded = models.BooleanField(help_text="")
     project_desc = models.TextField(help_text="")
+    search_vector = SearchVectorField(null=True, blank=True)
+    objects = LabManager()
 
     # Metadata
     class Meta:
         ordering = ['-name']
+
+    def save(self, *args, **kwargs):
+        super(Lab, self).save(*args, **kwargs)
+        self.search_vector = (
+            SearchVector(
+                'project_desc', weight='A'
+            )
+        )
+        super().save(*args, **kwargs)
 
     # Methods
     def get_absolute_url(self):

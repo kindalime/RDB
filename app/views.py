@@ -4,7 +4,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404, HttpResponse
 from .models import Lab
+import json
 
 def index(request):
     return render(request, "index.html")
@@ -14,6 +16,26 @@ def about(request):
 
 def contact(request):
     return render(request, "contact.html")
+
+def search(request):
+    search_term = request.GET.get('q', None)
+    if not search_term:
+        raise Http404('Send a search term')
+
+    labs = Lab.objects.search(search_term)
+
+    response_data = [
+        {
+            'rank': lab.rank,
+            'description': lab.project_desc,
+            'url': lab.get_absolute_url(),
+        } for lab in labs
+    ]
+
+    return HttpResponse(
+        json.dumps(response_data), 
+        content_type='application/json',
+    )
 
 class LabDetail(LoginRequiredMixin, DetailView):
     model = Lab
