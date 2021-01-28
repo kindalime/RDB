@@ -28,7 +28,7 @@ def search(request):
         {
             'rank': lab.rank,
             'name': lab.name,
-            'description': lab.project_desc,
+            'project_desc': lab.project_desc,
             'url': lab.get_absolute_url(),
         } for lab in labs
     ]
