@@ -3,6 +3,10 @@
 {% block title %}Results{% endblock %}
 
 {% block content %}
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
 <ul>
     {% csrf_token %}
 
@@ -14,8 +18,15 @@
       {% for lab in response_data %}
         <li>
           {{ lab.name }} - {{ lab.project_desc }}
+          <i class="heart fa fa-heart-o"></i>
         </li>
       {% endfor %}
     {% endif %}
 </ul>
+
+<script>
+  $(".heart.fa").click(function() {
+    $(this).toggleClass("fa-heart fa-heart-o");
+  });
+</script>
 {% endblock %}
