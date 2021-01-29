@@ -1,3 +1,9 @@
+:root {
+  --main: #0f4d92;
+  --highlight: #2196F3; 
+  overflow: visible; 
+}
+
 .top-padding{
     overflow-x: auto;
     text-align: center;
@@ -42,11 +48,11 @@
 }
 
 .buttonblue:hover {
-    background-color: #0f4d92;
+    background-color: var(--main);
 }
 
 .topnav {
-    background-color: #0f4d92;
+    background-color: var(--main);
 }
 
 .topnavtext {
@@ -54,7 +60,7 @@
 }
 
 .bottomnav {
-    background-color: #0f4d92;
+    background-color: var(--main);
     color: white;
     font-size: 15px;
     text-align: center;
@@ -136,7 +142,7 @@ html {
 }
 
 .blue1{
-      border-top: 1px solid #0f4d92;
+      border-top: 1px solid var(--main);
       width:50%;
       text-align:left;
       margin-left:0
@@ -184,7 +190,7 @@ html {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: var(--highlight);
 }
 
 input:focus + .slider {
@@ -247,7 +253,7 @@ textarea {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #0f4d92;
+  background-color: var(--main);
   color: white;
 }
 
@@ -257,4 +263,51 @@ textarea {
     font-size: 20px;
     padding: 10px;
     vertical-align: central;
+}
+
+
+/* footer */
+footer{
+  background-color: var(--main);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#footer {
+  flex-direction: row;
+  padding: 1em 1em 0 1em;
+  color: #fff;
+}
+
+#footer a{
+  transition: .3s ease;
+}
+#footer a:hover {
+  color: var(--highlight);
+}
+
+/* Button */
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-large {
+  padding: 1rem;
+  font-size: 16px;
+}
+
+@media (max-width:600px)
+{
+  #footer {
+    flex-direction: column;
+  }
+  .button-container {
+    flex-direction: column;
+  }
 }
