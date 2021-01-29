@@ -3,99 +3,99 @@
 {% block title %}Lab Form{% endblock %}
 
 {% block content %}
-<!-- <body class="w3-animate-opacity top-padding">
-<div class="mid-padding left">
-    <div class="header2">
-        <p>Lab Name: <input name="name" type="text" autocomplete="off"></p>
+<body class="w3-animate-opacity top-padding">
+    <div class="mid-padding left d-flex flex-column">
+        <div class="header2 d-flex row-to-col flex-row flex-wrap">
+            <p>Lab Name:</p>
+            <input name="name" type="text" autocomplete="off" style="width: 100%">
+        </div>
+
+        <hr class="blue1" style = "width: 100%">
+        <p class="header5 no-space">All edits will be saved automatically.</p>
+
+
+        <div class="d-flex justify-content-between row-to-col flex-wrap">
+            <div class="body3 m-3">
+                <div class = "mt-3">
+                    <p>PI: <input name="pi" type="text" autocomplete="off"></p>
+                </div>
+                <div class = "mt-3">
+                    <p>Department:
+                    <select name="department" id="department">
+                        <option disabled selected value="Department"></option>
+                            {% for department in departments %}
+                                <option>{{ department }}</option>
+                            {% endfor %}
+                    </select> </p>
+                </div>
+                <div class = "mt-3">
+                    <p> Contact: <input name="contact" type="text" name="search" autocomplete="off"> </p>
+                </div>
+                <div class = "mt-3">
+                    </p> Website: <input type="text" name="website" autocomplete="off"> </p>
+                </div>
+                <div class = "mt-3">
+                    <p> Address: <input type="text" name="address" autocomplete="off"> </p>
+                </div>
+                <div class = "mt-3">
+            
+                    <label class="switch">
+                        <input id="slider" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <p id="status">Not Accepting New Undergraduates</p>
+                    <script>
+                        function change()
+                        {
+                            if (document.getElementById("status").innerHTML == "Not Accepting New Undergraduates") {
+                                document.getElementById("status").innerHTML = "Accepting New Undergraduates";
+                            }
+                            else {
+                                document.getElementById("status").innerHTML = "Not Accepting New Undergraduates";
+                            }
+        
+                        }
+                        function listen()
+                        {
+                            document.getElementById("slider").addEventListener("click", change);
+                        }
+        
+                        document.addEventListener("DOMContentLoaded", listen);
+                    </script>
+                </div>
+            </div>
+            <div></div>
+            <div class="body m-3 flex-grow-1">
+                <p>Lab Description:</p>
+                <div>
+                    <textarea name="description"></textarea>
+                </div>
+                <div class="body3">
+                    Last Updated: {{ last_updated }}
+                </div>
+            </div>
+        </div>
+
+        <hr class="blue1" style = "width: 100%">
+
+        <p class="header5 no-space">To allow other individuals to edit this page, please enter their NetID:</p>
+        <div class="float-container">
+            <div class="float-child4">
+                <input placeholder="NetID" name="netID" type="text" autocomplete="off">
+            </div>
+            <div class="float-child4">
+                <button type="button" id="add" class="btn btn-outline-secondary btn-sm btn-block rounded-0 buttonblue">Add</button>
+            </div>
+        </div>
     </div>
+    </body>
 
-    <hr class="blue1">
-    <p class="header5 no-space">All edits will be saved automatically.</p>
-
-
-    <div class="float-container">
-        <div class="float-child body3">
-            <div>
-                <p>PI: <input name="pi" type="text" autocomplete="off"></p>
-            </div>
-            <div>
-                <p>Department:
-                <select name="department" id="department">
-                    <option disabled selected value="Department"></option>
-                        {% for department in departments %}
-                            <option>{{ department }}</option>
-                        {% endfor %}
-                </select> </p>
-            </div>
-            <div>
-                <p> Contact: <input name="contact" type="text" name="search" autocomplete="off"> </p>
-            </div>
-            <div>
-                </p> Website: <input type="text" name="website" autocomplete="off"> </p>
-            </div>
-            <div>
-                <p> Address: <input type="text" name="address" autocomplete="off"> </p>
-            </div>
-        </div>
-        <div class="float-child right">
-           
-            <label class="switch">
-                <input id="slider" type="checkbox">
-                <span class="slider round"></span>
-            </label>
-            <p id="status">Not Accepting New Undergraduates</p>
-            <script>
-                function change()
-                {
-                    if (document.getElementById("status").innerHTML == "Not Accepting New Undergraduates") {
-                        document.getElementById("status").innerHTML = "Accepting New Undergraduates";
-                    }
-                    else {
-                        document.getElementById("status").innerHTML = "Not Accepting New Undergraduates";
-                    }
-
-                }
-                function listen()
-                {
-                    document.getElementById("slider").addEventListener("click", change);
-                }
-
-                document.addEventListener("DOMContentLoaded", listen);
-            </script>
-        </div>
-    </div>
-
-    <div class="space1"></div>
-
-    <div class="body3 mid-padding left">
-        <p>Lab Description:</p>
-        <div>
-            <textarea name="description"></textarea>
-        </div>
-        <div class="body3">
-            Last Updated: {{ last_updated }}
-        </div>
-    </div>
-
-    <hr class="blue1">
-
-    <p class="header5 no-space">To allow other individuals to edit this page, please enter their NetID:</p>
-    <div class="float-container">
-        <div class="float-child4">
-             <input placeholder="NetID" name="netID" type="text" autocomplete="off">
-        </div>
-        <div class="float-child4">
-            <button type="button" id="add" class="btn btn-outline-secondary btn-sm btn-block rounded-0 buttonblue">Add</button>
-        </div>
-    </div>
-</div>
-</body> -->
-<form method="POST" enctype="multipart/form-data"> 
-  
-    {% csrf_token %} 
-  
-    {{ form.as_p }} 
-      
-    <input type="submit" value="Submit">
-</form>
+    <form method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-center"> 
+    
+        {% csrf_token %} 
+    
+        {{ form.as_p }} 
+        
+        <input type="submit" value="Submit" style = "margin-bottom: 150px; width: 30%;">
+    </form>
 {% endblock %}
