@@ -32,11 +32,11 @@ def get_secret(setting, secrets=secrets):
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '7h6$dls@0&^z!7s8&0(#nl7i1kctoony*7-83znqzyd&3&t%j$'
-# DB_PASSWORD = 'S9Adqxe07mhweGxTWjaYBARW1Edao35C'
+# DB_PASSWORD = '4e354810647556c6688ddd1a85e1544fe0b17f097111021e4ad85e62c28592a1'
 SECRET_KEY = get_secret('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'secure.its.yale.edu',
