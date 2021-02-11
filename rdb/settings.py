@@ -143,8 +143,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 CAS_SERVER_URL = 'https://secure.its.yale.edu/cas/'
+
+CAS_APPLY_ATTRIBUTES_TO_USER = True
+
 CAS_IGNORE_REFERER = True
+
 CAS_LOGOUT_COMPLETELY = False
+
 CAS_VERSION = '3'
 
 LOGIN_URL="/accounts/login/"
