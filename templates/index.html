@@ -22,6 +22,9 @@
             </div>
         </div>
     </div>
+    {{ request.user }}
+    {{ request.user.is_staff }}
+    {{ request.user.is_authenticated }}
     {% else %}
     <p class="header2">Powered by YURA</p>
     <div class="float-container button-container row-to-col">
