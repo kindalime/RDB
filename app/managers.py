@@ -4,6 +4,7 @@ from django.contrib.postgres.search import (
 )
 from django.db import models
 from django.db.models.functions import Greatest
+from psycopg2.extensions import adapt
 
 
 class LabManager(models.Manager):
@@ -15,7 +16,7 @@ class LabManager(models.Manager):
             + SearchVector('email', weight='D')
         )
 
-        search_query = SearchQuery(search_text)
+        search_query = BetterSearchQuery(search_text, search_type='raw')
 
         search_rank = SearchRank(search_vectors, search_query)
         trigram_similarity = Greatest(
@@ -33,3 +34,27 @@ class LabManager(models.Manager):
             .order_by('-rank')
         )
         return qs
+
+class BetterSearchQuery(SearchQuery):
+    """
+    Alter the tsquery executed by SearchQuery
+    """
+    def as_sql(self, compiler, connection):
+        # Or <-> available in Postgres 9.6
+        print(self.source_expressions)
+        value = adapt('%s:*' % ' & '.join(self.source_expressions[0].value.split()))
+
+        if self.config:
+            config_sql, config_params = compiler.compile(self.config)
+            template = 'to_tsquery({}::regconfig, {})'\
+                .format(config_sql, value)
+            params = config_params
+        else:
+            template = 'to_tsquery({})'\
+                .format(value)
+            params = []
+
+        if self.invert:
+            template = '!!({})'.format(template)
+
+        return template, params
