@@ -14,10 +14,9 @@ class Lab(models.Model):
     name = models.CharField(help_text="", max_length=255)
     pi_name = models.CharField(help_text="", max_length=255)
     pi_id = models.CharField(help_text="", max_length=255)
-    department = models.CharField(help_text="", max_length=255, choices=departments) # cat 
+    department = models.CharField(help_text="", max_length=255, choices=departments)
     work_remote = models.BooleanField(help_text="")
     work_in_person = models.BooleanField(help_text="")
-    keywords = models.JSONField(help_text="", null=True, blank=True) # list of keywords in JSON format
     accept_undergrads = models.BooleanField(help_text="")
     accept_grads = models.BooleanField(help_text="")
     email = models.CharField(help_text="", max_length=255)
@@ -35,9 +34,10 @@ class Lab(models.Model):
     def save(self, *args, **kwargs):
         super(Lab, self).save(*args, **kwargs)
         self.search_vector = (
-            SearchVector(
-                'project_desc', weight='A'
-            )
+            SearchVector('name', weight='A')
+            + SearchVector('project_desc', weight='B')
+            + SearchVector('pi_name', weight='C')
+            + SearchVector('email', weight='D')
         )
         super().save(*args, **kwargs)
 
