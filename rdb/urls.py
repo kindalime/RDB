@@ -26,7 +26,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
     path('search/', login_required(views.search), name='search'),
-    path('lucky/', login_required(views.lucky), name='lucky'),
+    path('random/', login_required(views.random), name='random'),
     path('profile/', login_required(views.profile), name='profile'),
     path('admin/', admin.site.urls),
     path('accounts/login/', django_cas_ng.views.LoginView.as_view(), name='cas_ng_login'),

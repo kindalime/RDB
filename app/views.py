@@ -28,7 +28,7 @@ def search(request):
 
     return render(request, 'search.html', {'labs': labs})
 
-def lucky(request):
+def random(request):
     return HttpResponseRedirect(Lab.objects.order_by('?').first().get_absolute_url())
 
 def profile(request):
