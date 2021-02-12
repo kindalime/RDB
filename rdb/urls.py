@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from app import views
 import django_cas_ng.views
 
@@ -24,8 +25,9 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
-    path('search/', views.search, name='search'),
-    path('lucky/', views.lucky, name='lucky'),
+    path('search/', login_required(views.search), name='search'),
+    path('lucky/', login_required(views.lucky), name='lucky'),
+    path('profile/', login_required(views.profile), name='profile'),
     path('admin/', admin.site.urls),
     path('accounts/login/', django_cas_ng.views.LoginView.as_view(), name='cas_ng_login'),
     path('accounts/logout/', django_cas_ng.views.LogoutView.as_view(), name='cas_ng_logout'),

@@ -31,6 +31,11 @@ def search(request):
 def lucky(request):
     return HttpResponseRedirect(Lab.objects.order_by('?').first().get_absolute_url())
 
+def profile(request):
+    user = User.objects.get(username=request.user)
+
+    return render(request, "profile.html", {'user': user})
+
 class LabDetail(LoginRequiredMixin, DetailView):
     model = Lab
     fields = '__all__'
