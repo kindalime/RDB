@@ -46,12 +46,12 @@
 <ul>
     {% csrf_token %}
 
-    {% if not response_data %}
+    {% if not labs %}
       <li>
         No results found
       </li>
     {% else %}
-      {% for lab in response_data %}
+      {% for lab in labs %}
         <li>
           {{ lab.name }} - {{ lab.project_desc }}
           <i class="heart fa fa-heart-o"></i>

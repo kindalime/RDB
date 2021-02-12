@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.models import User
 from .models import Lab
+from django.http import JsonResponse
 import json
 
 def index(request):
@@ -18,26 +20,16 @@ def contact(request):
     return render(request, "contact.html")
 
 def search(request):
-    search_term = request.GET.get('q', None)
-    if not search_term:
-        raise Http404('Send a search term')
+    query = request.GET.get("q", None)
+    if not query:
+        return HttpResponseRedirect("/")
 
-    labs = Lab.objects.search(search_term)
+    labs = Lab.objects.search(query)
 
-    response_data = [
-        {
-            'rank': lab.rank,
-            'name': lab.name,
-            'project_desc': lab.project_desc,
-            'url': lab.get_absolute_url(),
-        } for lab in labs
-    ]
-
-    return render(request, 'search.html', {'response_data': response_data})
+    return render(request, 'search.html', {'labs': labs})
 
 def lucky(request):
-    return render(request, 'search.html', {'response_data':  [Lab.objects.order_by('?').first(), ]})
-
+    return HttpResponseRedirect(Lab.objects.order_by('?').first().get_absolute_url())
 
 class LabDetail(LoginRequiredMixin, DetailView):
     model = Lab
@@ -47,11 +39,25 @@ class LabCreate(LoginRequiredMixin, CreateView):
     model = Lab
     fields = '__all__'
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
+
 class LabUpdate(LoginRequiredMixin, UpdateView):
     model = Lab
     fields = '__all__'
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
+
 class LabDelete(LoginRequiredMixin, DeleteView):
     model = Lab
-    success_url = "/"
-    # success_url = reverse_lazy('Lab')
+    success_url = reverse_lazy('index')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
