@@ -40,8 +40,6 @@ class BetterSearchQuery(SearchQuery):
     Alter the tsquery executed by SearchQuery
     """
     def as_sql(self, compiler, connection):
-        # Or <-> available in Postgres 9.6
-        print(self.source_expressions)
         value = adapt('%s:*' % ' & '.join(self.source_expressions[0].value.split()))
 
         if self.config:

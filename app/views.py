@@ -33,7 +33,6 @@ def random(request):
 
 def profile(request):
     user = User.objects.get(username=request.user)
-
     return render(request, "profile.html", {'user': user})
 
 class LabDetail(LoginRequiredMixin, DetailView):
