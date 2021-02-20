@@ -43,15 +43,15 @@
                         <input id="slider" type="checkbox">
                         <span class="slider round"></span>
                     </label>
-                    <p id="status">Not Accepting New Undergraduates</p>
+                    <p id="status">Not Accepting Undergraduates</p>
                     <script>
                         function change()
                         {
-                            if (document.getElementById("status").innerHTML == "Not Accepting New Undergraduates") {
-                                document.getElementById("status").innerHTML = "Accepting New Undergraduates";
+                            if (document.getElementById("status").innerHTML == "Not Accepting Undergraduates") {
+                                document.getElementById("status").innerHTML = "Accepting Undergraduates";
                             }
                             else {
-                                document.getElementById("status").innerHTML = "Not Accepting New Undergraduates";
+                                document.getElementById("status").innerHTML = "Not Accepting Undergraduates";
                             }
         
                         }
@@ -94,7 +94,24 @@
     
         {% csrf_token %} 
     
-        {{ form.as_p }} 
+        {{ form.as_p }}
+
+        <!-- Testinga
+        <tr>
+        <th>{{ form.name.label_tag }}</th>
+        <td>
+            {{ form.name.errors }}
+            {{ form.name }}
+        </td>
+        </tr> -->
+
+        {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            Test
+            {{ field.label_tag }} {{ field }}
+        </div>
+        {% endfor %}
         
         <input type="submit" value="Submit" style = "margin-bottom: 150px; width: 30%;">
     </form>
