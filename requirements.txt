@@ -3,3 +3,4 @@ django-cas-ng
 psycopg2
 gunicorn
 whitenoise
+django-widget-tweaks

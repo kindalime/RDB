@@ -67,20 +67,15 @@
     overflow: hidden;
     bottom: 0;
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
     height: 60px;
     font-family: "YaleNew", Roman;
 }
 
- /* "body" and "html" fix nav to bottom */
-body {
-  margin-bottom: 60px;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
 .header1{
@@ -270,7 +265,7 @@ textarea {
 footer{
   text-align: center !important;
   background-color: var(--main);
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   width: 100%;
   margin: 0;
@@ -303,6 +298,19 @@ footer{
 
 .row-to-col { 
   flex-direction: row;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+main {
+  margin: 2em;
+  text-align: center;
 }
 
 @media (max-width:600px)

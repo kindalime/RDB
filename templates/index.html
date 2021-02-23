@@ -1,38 +1,75 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 
 {% block title %}Index{% endblock %}
 
-{% block content %}
 <head>
     <link href="/static/index.css" rel="stylesheet">
 </head>
 
-<body class="w3-animate-opacity top-padding">
-<div class="center-padding">
-    <img src="/static/RDBLogo.png" alt="RDB logo" style="width:40%;">
+{% block content %}
+<div class=""> <img src="/static/RDBLogo.png" alt="RDB logo" style="width: 50%;">
     {% if request.user.is_authenticated %}
-    <div class="container">
-        <div class="row">
-            <div class="eight columns offset-by-two">
-                <form action="search" class="lab-search-form">
-                    <input required type="search" name="q" placeholder="Search RDB..." class="lab-search-input" id="lab-search-input">
-                    <button class="button btn btn-lab">Search</button>
-                    <a class="button btn btn-lucky" href="/lucky">I'm Feeling Lucky</a>
-                </form>
-            </div>
-        </div>
-    </div>
+    <table id="labs" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Lab Name</th>
+                <th>Principal Investigator</th>
+                <!-- <th>Description</th> -->
+                <th>Website</th>
+                <th>Funded</th>
+                <th>Mentors</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lab in labs %}
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-success btn-xs dt-add" style="margin-right:10px;">
+                        <i class="fas fa-plus" aria-hidden="true"></i>
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                        {{lab.name}}
+                    </td>
+                    <td>{{lab.pi_name}}</td>
+                    <!-- <td>{{lab.project_desc}}</td> -->
+                    <td>{{lab.website}}</td>
+                    <td>{{lab.funded}}</td>
+                    <td>{{lab.mentors}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     {% else %}
     <p class="header2">Powered by YURA</p>
     <div class="float-container button-container row-to-col">
         <div class="float-child">
-            <a href="/accounts/login"><button type="button" id="students" class="btn btn-outline-secondary btn-large btn-block rounded-0 buttonblue">Student Login</button></a>
+            <a href="/accounts/login">
+                <button type="button" id="students" class="btn btn-outline-secondary btn-large btn-block rounded-0 buttonblue">Student Login</button>
+            </a>
         </div>
         <div class="float-child">
             <button type="button" id="faculty" class="btn btn-outline-secondary btn-large btn-block rounded-0 buttonblue">Faculty Login</button>
         </div>
-    </div>
+    </div> 
     {% endif %}
 </div>
-</body>
+
+<script>
+    $(document).ready(function() {
+        $('#labs').DataTable({
+            "paging": true,
+            // "autoWidth": true,
+            responsive: true,
+            // "columnDefs": [{
+            //     "targets": 3,
+            //     "createdCell": function(td, cellData, rowData, row, col) {
+            //         if (cellData == 'Planned') {
+            //             var rowIndex = row+1;
+            //             $($('#example tbody tr:nth-child('+rowIndex+')')).addClass('greenStriped');
+            //         }
+            //     }
+            // }]
+        });
+    });
+</script>
 {% endblock %}

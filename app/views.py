@@ -11,7 +11,8 @@ from django.http import JsonResponse
 import json
 
 def index(request):
-    return render(request, "index.html")
+    labs = Lab.objects.all()
+    return render(request, "index.html", {'labs': labs})
 
 def about(request):
     return render(request, "about.html")
@@ -42,6 +43,12 @@ class LabDetail(LoginRequiredMixin, DetailView):
 class LabCreate(LoginRequiredMixin, CreateView):
     model = Lab
     fields = '__all__'
+
+    # def form_valid(self, form):
+    #     self.object = form.save(commit=False)
+    #     self.object.pi_id = str(self.request.user)
+    #     self.object.save()
+    #     return super().form_valid(form)
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:

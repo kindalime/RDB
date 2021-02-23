@@ -6,24 +6,23 @@ from .managers import LabManager
 
 class Lab(models.Model):
     """A typical class defining a model, derived from the Model class."""
-
     # TODO: get department choices and program in here
     departments = [("abbreviated", "actual")]
 
     # Fields
-    name = models.CharField(help_text="", max_length=255)
-    pi_name = models.CharField(help_text="", max_length=255)
-    pi_id = models.CharField(help_text="", max_length=255)
-    department = models.CharField(help_text="", max_length=255, choices=departments)
-    work_remote = models.BooleanField(help_text="")
-    work_in_person = models.BooleanField(help_text="")
-    accept_undergrads = models.BooleanField(help_text="")
-    accept_grads = models.BooleanField(help_text="")
-    email = models.CharField(help_text="", max_length=255)
-    website = models.CharField(help_text="", max_length=255)
-    mentors = models.BooleanField(help_text="")
-    funded = models.BooleanField(help_text="")
-    project_desc = models.TextField(help_text="")
+    name = models.CharField(max_length=255)
+    pi_name = models.CharField(max_length=255)
+    pi_id = models.CharField(max_length=255)
+    department = models.CharField(max_length=255, choices=departments)
+    work_remote = models.BooleanField()
+    work_in_person = models.BooleanField()
+    accept_undergrads = models.BooleanField()
+    accept_grads = models.BooleanField()
+    email = models.CharField(max_length=255)
+    website = models.CharField(max_length=255)
+    mentors = models.BooleanField()
+    funded = models.BooleanField()
+    project_desc = models.TextField()
     search_vector = SearchVectorField(null=True, blank=True)
     objects = LabManager()
 
