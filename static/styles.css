@@ -73,9 +73,18 @@
     font-family: "YaleNew", Roman;
 }
 
-html, body {
-  height: 100%;
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   margin: 0;
+}
+
+main {
+  flex: 1;
+  min-height: auto;
+  margin: 2em;
+  text-align: center;
 }
 
 .header1{
@@ -306,11 +315,6 @@ footer{
 
 .w-100 {
   width: 100%;
-}
-
-main {
-  margin: 2em;
-  text-align: center;
 }
 
 @media (max-width:600px)
