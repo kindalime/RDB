@@ -345,8 +345,12 @@ footer{
   width: 100%;
 }
 
-tr:hover {
+tbody tr:hover {
   cursor: pointer;
+}
+
+.white {
+  color: white;
 }
 
 @media (max-width:600px)
