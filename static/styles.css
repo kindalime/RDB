@@ -345,6 +345,10 @@ footer{
   width: 100%;
 }
 
+tr:hover {
+  cursor: pointer;
+}
+
 @media (max-width:600px)
 {
   .row-to-col {
