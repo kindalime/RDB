@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             {% for lab in labs %}
-                <tr>
+                <tr data-href="{% url 'lab-detail' lab.pk %}">
                     <td>
                         <button type="button" class="btn btn-success btn-xs dt-add" style="margin-right:10px;">
                         <i class="fas fa-plus" aria-hidden="true"></i>
@@ -58,17 +58,13 @@
     $(document).ready(function() {
         $('#labs').DataTable({
             "paging": true,
-            // "autoWidth": true,
+            "autoWidth": true,
             responsive: true,
-            // "columnDefs": [{
-            //     "targets": 3,
-            //     "createdCell": function(td, cellData, rowData, row, col) {
-            //         if (cellData == 'Planned') {
-            //             var rowIndex = row+1;
-            //             $($('#example tbody tr:nth-child('+rowIndex+')')).addClass('greenStriped');
-            //         }
-            //     }
-            // }]
+        });
+
+        $('table tr').click(function(){
+            window.location = $(this).data('href');
+            return false;
         });
     });
 </script>
