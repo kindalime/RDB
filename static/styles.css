@@ -234,6 +234,18 @@ input:checked + .slider:before {
   background-color: white;
 }
 
+.space2 {
+  height: 50px;
+  width: 50%;
+  background-color: white;
+}
+
+.space3{
+  height: 250px;
+  width: 100%;
+  background-color: white;
+}
+
 .space1 {
   height: 50px;
   width: 50%;
