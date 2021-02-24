@@ -103,24 +103,40 @@ html {
     font-family: "YaleNew", Roman;
 }
 
+.body0{
+    font-size: 35px;
+    font-family: "Poppins-light", sans-serif;
+}
+
 .body1{
     font-size: 25px;
-    font-family: Verdana, sans-serif;
+    font-family: "Poppins-light", sans-serif;
+}
+
+.body05b{
+    font-size: 20px;
+    font-family: "Poppins-light", sans-serif;
+    font-weight:bold;
+}
+
+.body05{
+    font-size: 20px;
+    font-family: "Poppins-light", sans-serif;
 }
 
 .body2{
     font-size: 17px;
-    font-family: Verdana, sans-serif;
+    font-family: "Poppins-light", sans-serif;
 }
 
 .body3{
     font-size: 15px;
-    font-family: Verdana, sans-serif;
+    font-family: "Poppins-light", sans-serif;
 }
 
 .body4{
     font-size: 10px;
-    font-family: Verdana, sans-serif;
+    font-family: "Poppins-light", sans-serif;
 }
 
 .font1{
