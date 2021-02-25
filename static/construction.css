@@ -1,0 +1,51 @@
+main {
+    background-image: url('/static/yale.svg');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.square {
+    position: relative;
+    width: 20%;
+    margin-bottom: 2em;
+}
+  
+.square:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+  
+.content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    border: 5px solid black;
+    box-sizing: border-box;
+}
+
+#message {
+    opacity: 1 !important;
+}
+
+@media screen and (max-width: 1024px) {
+    .square {
+        width: 50%;
+    }
+    .content {
+        padding: 2em;
+    }
+}

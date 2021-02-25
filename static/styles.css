@@ -83,8 +83,8 @@ body {
 main {
   flex: 1;
   min-height: auto;
-  margin: 2em;
-  text-align: center;
+  /* margin: 2em;
+  text-align: center; */
 }
 
 .header1{

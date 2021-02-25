@@ -12,7 +12,7 @@ import json
 
 def index(request):
     labs = Lab.objects.all()
-    return render(request, "index.html", {'labs': labs})
+    return render(request, "construction.html", {'labs': labs})
 
 def about(request):
     return render(request, "about.html")
@@ -27,14 +27,14 @@ def search(request):
 
     labs = Lab.objects.search(query)
 
-    return render(request, 'search.html', {'labs': labs})
+    return render(request, 'construction.html', {'labs': labs})
 
 def random(request):
     return HttpResponseRedirect(Lab.objects.order_by('?').first().get_absolute_url())
 
 def profile(request):
     user = User.objects.get(username=request.user)
-    return render(request, "profile.html", {'user': user})
+    return render(request, "construction.html", {'user': user})
 
 class LabDetail(LoginRequiredMixin, DetailView):
     model = Lab
