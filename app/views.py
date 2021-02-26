@@ -35,11 +35,6 @@ def profile(request):
     labs = Lab.objects.filter(edit__contains=[request.user])
     return render(request, "profile.html", {'user': user, 'labs': labs})
 
-def handler404(request, exception, template_name="404.html"):
-    response = render(request, template_name)
-    response.status_code = 404
-    return response
-
 class LabDetail(LoginRequiredMixin, DetailView):
     model = Lab
     fields = '__all__'
@@ -61,15 +56,19 @@ class LabCreate(LoginRequiredMixin, CreateView):
         """
         form = self.get_form()
         edit = request.POST.get("netID").split(',')
-        if request.user not in edit:
-            edit.append(request.user)
+
+        if request.user.username not in edit:
+            edit.append(request.user.username)
+
+        edit = list(set(list(filter(None, edit))))
+        
         if form.is_valid():
             return self.form_valid(form, edit)
         else:
             return self.form_invalid(form)
 
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
+        if not request.user.is_staff:
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
 
@@ -80,8 +79,12 @@ class LabUpdate(LoginRequiredMixin, UpdateView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         edit = request.POST.get("netID").split(',')
-        if request.user not in edit:
-            edit.append(request.user)
+
+        if request.user.username not in edit:
+            edit.append(request.user.username)
+        
+        edit = list(set(list(filter(None, edit))))
+
         self.object.edit = edit
         self.object.save()
         return super().post(request, *args, **kwargs)
