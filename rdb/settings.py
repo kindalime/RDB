@@ -39,9 +39,6 @@ SECRET_KEY = get_secret('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'secure.its.yale.edu',
-    'localhost',
-    '127.0.0.1',
     '*',
 ]
 
