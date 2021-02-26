@@ -110,19 +110,25 @@
 			<hr class="blue1" style="width:100%">
 			<p class="mb-0 header5 no-space">To allow other individuals to edit this page, please enter their NetID:</p>
 			<div class="p-0 m-3 float-container">
-				<div class="mb-3 float-child4">
-					<input placeholder="NetID" name="netID" type="text" autocomplete="off"> </div>
+				<div class="mb-3">
+					<input id="text-netid" placeholder="NetID" value="" data-role="tagsinput" name="netID" type="text" autocomplete="off">
+				</div>
 				<div class="float-child4">
-					<button type="button" id="add" class="btn btn-outline-secondary btn-sm btn-block rounded-0 buttonblue">Add</button>
+					<button id="add-netid" type="button" id="add" class="btn btn-outline-secondary btn-sm btn-block rounded-0 buttonblue">Add</button>
 				</div>
 			</div>
-			<input type="submit" value="Submit" style="margin-bottom: 2rem; margin-top: 2rem; width: 100%; height: 50px;">
+			<input id="form-type" type="submit" value="Submit" style="margin-bottom: 2rem; margin-top: 2rem; width: 100%; height: 50px;">
 		</div>
 	</form>
 
 	<script>
 		$(document).ready(function() {
-			var saveInfo = true;
+			// var object = "{{ object }}" ? true : false;
+			var saveInfo = "{{ object }}" ? false : true;
+
+			if (!saveInfo) {
+				$("#form-type").val('Update');
+			}
 
 			if (localStorage.getItem('lab_name')) {
 				$(".lab_name").val(localStorage.getItem('lab_name'));
@@ -191,6 +197,8 @@
 					} catch(e) {
 						console.log("localStorage is disabled", e)
 					}
+				} else if (!saveInfo) {
+					localStorage.clear();
 				} else {
 					console.log("localStorage not available")
 				}
@@ -200,6 +208,28 @@
 				localStorage.clear();
 				saveInfo = false;
 				return true;
+			});
+
+			$("#add-netid").on("click", function() {
+				$('#text-netid').tagsinput('add', $("#text-netid").val());
+			});
+
+			$('.bootstrap-tagsinput').on('keyup keypress', function(e) {
+				var keyCode = e.keyCode || e.which;
+				if (keyCode === 13) {
+					e.preventDefault();
+					$('#text-netid').tagsinput('add', $("#text-netid").val());
+					return false;
+				}
+			});
+
+			$('#text-netid').on('keyup keypress', function(e) {
+				var keyCode = e.keyCode || e.which;
+				if (keyCode === 13) {
+					e.preventDefault();
+					$('#text-netid').tagsinput('add', $("#text-netid").val());
+					return false;
+				}
 			});
 		});
 
@@ -213,12 +243,29 @@
 		}
 
 		function saveCheckbox(name_class) {
-			if ($("." + name_class).is(":checked")) {
-				localStorage.setItem(name_class, "yes");
-			} else {
-				localStorage.setItem(name_class, "no");            
+			if (saveInfo) {
+				if ($("." + name_class).is(":checked")) {
+					localStorage.setItem(name_class, "yes");
+				} else {
+					localStorage.setItem(name_class, "no");            
+				}
 			}
 		}
+
+		var netIDs = "{{ object.edit|safe }}";
+
+		if(netIDs != null) {
+			netIDs = netIDs.replace(/'/g, '"');
+			netIDs = JSON.parse(netIDs);
+		}
+		$('#text-netid').tagsinput('add', '');
+
+		for (index = 0; index < netIDs.length; index++) { 
+			$('#text-netid').tagsinput('add', netIDs[index]);
+			console.log($("#text-netid").tagsinput('items'))
+		}
+
+		$(".lab_name").attr("placeholder", "E.g. Marvin Chun's Lab");
 	</script>
 </body>
 {% endblock %}

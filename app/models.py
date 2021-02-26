@@ -2,7 +2,11 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.fields import ArrayField
+from django.conf import settings 
 from .managers import LabManager
+
+User = settings.AUTH_USER_MODEL
 
 class Lab(models.Model):
     """A typical class defining a model, derived from the Model class."""
@@ -25,6 +29,7 @@ class Lab(models.Model):
     project_desc = models.TextField()
     search_vector = SearchVectorField(null=True, blank=True)
     objects = LabManager()
+    edit = ArrayField(models.CharField(max_length=50, blank=True, null=True), default=list, blank=True, null=True)
 
     # Metadata
     class Meta:

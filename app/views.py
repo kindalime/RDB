@@ -7,8 +7,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from .models import Lab
-from django.http import JsonResponse
-import json
 
 def index(request):
     labs = Lab.objects.all()
@@ -34,7 +32,13 @@ def random(request):
 
 def profile(request):
     user = User.objects.get(username=request.user)
-    return render(request, "construction.html", {'user': user})
+    labs = Lab.objects.filter(edit__contains=[request.user])
+    return render(request, "profile.html", {'user': user, 'labs': labs})
+
+def handler404(request, exception, template_name="404.html"):
+    response = render(request, template_name)
+    response.status_code = 404
+    return response
 
 class LabDetail(LoginRequiredMixin, DetailView):
     model = Lab
@@ -44,11 +48,25 @@ class LabCreate(LoginRequiredMixin, CreateView):
     model = Lab
     fields = '__all__'
 
-    # def form_valid(self, form):
-    #     self.object = form.save(commit=False)
-    #     self.object.pi_id = str(self.request.user)
-    #     self.object.save()
-    #     return super().form_valid(form)
+    def form_valid(self, form, edit):
+        self.object = form.save(commit=False)
+        self.object.edit = edit
+        self.object.save()
+        return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        """
+        Handle POST requests: instantiate a form instance with the passed
+        POST variables and then check if it's valid.
+        """
+        form = self.get_form()
+        edit = request.POST.get("netID").split(',')
+        if request.user not in edit:
+            edit.append(request.user)
+        if form.is_valid():
+            return self.form_valid(form, edit)
+        else:
+            return self.form_invalid(form)
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -59,16 +77,25 @@ class LabUpdate(LoginRequiredMixin, UpdateView):
     model = Lab
     fields = '__all__'
 
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        edit = request.POST.get("netID").split(',')
+        if request.user not in edit:
+            edit.append(request.user)
+        self.object.edit = edit
+        self.object.save()
+        return super().post(request, *args, **kwargs)
+
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
+        if request.user.username not in self.get_object().edit:
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
 
 class LabDelete(LoginRequiredMixin, DeleteView):
     model = Lab
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('profile')
 
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
+        if request.user.username not in self.get_object().edit:
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)

@@ -353,6 +353,31 @@ tbody tr:hover {
   color: white;
 }
 
+.label {
+  display: inline;
+  padding: .3em .6em .3em;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+#add-netid {
+  outline:none !important;
+  box-shadow: none !important;
+}
+
+.label-info {
+  background-color: #0f4d92;
+}
+
+.bootstrap-tagsinput {
+  width: 100% !important;
+}
+
 @media (max-width:600px)
 {
   .row-to-col {
