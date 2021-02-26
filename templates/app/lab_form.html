@@ -5,12 +5,12 @@
 
 {% block content %}
 <body class="w3-animate-opacity top-padding">
-	<form method="POST" enctype="multipart/form-data">
+	<form id="lab-form" method="POST" enctype="multipart/form-data" autocomplete="off">
 		{% csrf_token %}
 		<div class="mid-padding left d-flex flex-column">
-			<div class="header2 d-flex row-to-col flex-row flex-wrap">
+			<div class="mt-3 header2 d-flex row-to-col flex-row flex-wrap">
 				<p>Lab Name:</p>
-				{{ form.name | add_class:"w-100" }}
+				{{ form.name | add_class:"w-100 lab_name" }}
 				{{ form.name.errors }}
 			</div>
 			<hr class="blue1" style="width: 100%">
@@ -19,81 +19,89 @@
 				<div class="body3 m-3" style="margin-bottom: 0px !important;">
 					<div class="mt-3">
 						<p>PI:
-							{{ form.pi_name }}
+							{{ form.pi_name | add_class:"lab_pi" }}
 							{{ form.pi_name.errors }}
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Principal Investigator's (PI) name" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
 						<p>PI NetID:
-							{{ form.pi_id }}
+							{{ form.pi_id | add_class:"lab_netid" }}
 							{{ form.pi_id.errors }}
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Principal Investigator's (PI) NetID" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
 						<p>Department:
 							{{ form.department }}
 							{{ form.department.errors }}
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Which department is the lab in?" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
-						<p> Email:
-							{{ form.email }}
+						<p>Email:
+							{{ form.email | add_class:"lab_email" }}
 							{{ form.email.errors }}
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Which email will have access to lab notifications?" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
-						<p> Website:
-							{{ form.website }}
+						<p>Website:
+							{{ form.website | add_class:"lab_website" }}
 							{{ form.website.errors }}
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="What is the lab's website? (not required)" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
-						<p> Mentoring:
-							{{ form.mentors }}
+						<p>Mentoring:
+							{{ form.mentors | add_class:"lab_mentors" }}
 							{{ form.mentors.errors }}
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Does the lab have available mentors?" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
-						<p> Funded:
-							{{ form.funded }}
+						<p>Funded:
+							{{ form.funded | add_class:"lab_funded" }}
 							{{ form.funded.errors }}
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Is funding available for students?" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
 						<p> Accepting Undergraduates:
-							{{ form.accept_undergrads }}
+							{{ form.accept_undergrads | add_class:"lab_undergrads" }}
 							{{ form.accept_undergrads.errors }}
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Is the lab accepting undergrad students?" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
-						<p> Accepting Graduates:
-							{{ form.accept_grads }}
+						<p>Accepting Graduates:
+							{{ form.accept_grads | add_class:"lab_grads" }}
 							{{ form.accept_grads.errors }}
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Is the lab accepting grad students?" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
 						<p> Remote:
-							{{ form.work_remote }}
+							{{ form.work_remote | add_class:"lab_remote" }}
 							{{ form.work_remote.errors }}
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Does the lab have remote work?" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
-						<p> On Campus:
-							{{ form.work_in_person }}
+						<p> On-Campus:
+							{{ form.work_in_person | add_class:"lab_on_campus" }}
 							{{ form.work_in_person.errors }}
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Does the lab have on-campus work?" aria-hidden="true"></i>
 						</p>
 					</div>
-					<!-- <div class="mt-3">
-						<label class="switch">
-							<input id="slider" type="checkbox"> <span class="slider round"></span> </label>
-						<p id="status">Not Accepting Undergraduates</p>
-					</div> -->
 				</div>
 				<div></div>
 				<div class="body m-3 flex-grow-1" style="margin-bottom: 0px !important;">
-					<p>Lab Description:</p>
+					<p>Lab Description:
+						<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="What is the main function of the lab, what will students be doing, etc?" aria-hidden="true"></i>
+					</p>
 					<div>
-						{{ form.project_desc | add_class:"word_count" }}
+						{{ form.project_desc | add_class:"word_count lab_desc" }}
 						{{ form.project_desc.errors }}
 					</div>
 					<div class="align-right sbody3"> <span id="display_count">0</span>/500 </div>
@@ -108,39 +116,109 @@
 					<button type="button" id="add" class="btn btn-outline-secondary btn-sm btn-block rounded-0 buttonblue">Add</button>
 				</div>
 			</div>
+			<input type="submit" value="Submit" style="margin-bottom: 2rem; margin-top: 2rem; width: 100%; height: 50px;">
 		</div>
-		<input type="submit" value="Submit" style="margin-bottom: 5rem; width: 30%;">
 	</form>
 
 	<script>
-		// function change() {
-		// 	if(document.getElementById("status").innerHTML == "Not Accepting Undergraduates") {
-		// 		document.getElementById("status").innerHTML = "Accepting Undergraduates";
-		// 	} else {
-		// 		document.getElementById("status").innerHTML = "Not Accepting Undergraduates";
-		// 	}
-		// }
-
-		// function listen() {
-		// 	document.getElementById("slider").addEventListener("click", change);
-		// }
-		// document.addEventListener("DOMContentLoaded", listen);
 		$(document).ready(function() {
+			var saveInfo = true;
+
+			if (localStorage.getItem('lab_name')) {
+				$(".lab_name").val(localStorage.getItem('lab_name'));
+			}
+
+			if (localStorage.getItem('lab_pi')) {
+				$(".lab_pi").val(localStorage.getItem('lab_pi'));
+			}
+
+			if (localStorage.getItem('lab_netid')) {
+				$(".lab_netid").val(localStorage.getItem('lab_netid'));
+			}
+
+			if (localStorage.getItem('lab_email')) {
+				$(".lab_email").val(localStorage.getItem('lab_email'));
+			}
+
+			if (localStorage.getItem('lab_website')) {
+				$(".lab_website").val(localStorage.getItem('lab_website'));
+			}
+
+			if (localStorage.getItem('lab_desc')) {
+				$(".lab_desc").val(localStorage.getItem('lab_desc'));
+			}
+
+			loadCheckbox('lab_mentors');
+			loadCheckbox('lab_funded');
+			loadCheckbox('lab_undergrads');
+			loadCheckbox('lab_grads');
+			loadCheckbox('lab_remote');
+			loadCheckbox('lab_on_campus');
+
 			$(".word_count").on('keyup', function() {
 				var words = 0;
 				if((this.value.match(/\S+/g)) != null) {
 					words = this.value.match(/\S+/g).length;
 				}
 				if(words > 500) {
-					// Split the string on first 200 words and rejoin on spaces
-					var trimmed = $(this).val().split(/\s+/, 200).join(" ");
+					// Split the string on first 500 words and rejoin on spaces
+					var trimmed = $(this).val().split(/\s+/, 500).join(" ");
 					// Add a space at the end to make sure more typing creates new words
 					$(this).val(trimmed + " ");
 				} else {
 					$('#display_count').text(words);
 				}
 			});
+
+			$('[data-toggle="tooltip"]').tooltip();
+
+			window.addEventListener("unload", function(event) {
+				if (typeof localStorage !== 'undefined' && saveInfo) {
+					try {
+						console.log("saving to localStorage")
+						localStorage.setItem('lab_name', $('.lab_name').val());
+						localStorage.setItem('lab_pi', $('.lab_pi').val());
+						localStorage.setItem('lab_netid', $('.lab_netid').val());
+						localStorage.setItem('lab_email', $('.lab_email').val());
+						localStorage.setItem('lab_website', $('.lab_website').val());
+						localStorage.setItem('lab_desc', $('.lab_desc').val());
+						saveCheckbox('lab_mentors');
+						saveCheckbox('lab_funded');
+						saveCheckbox('lab_undergrads');
+						saveCheckbox('lab_grads');
+						saveCheckbox('lab_remote');
+						saveCheckbox('lab_on_campus');
+					} catch(e) {
+						console.log("localStorage is disabled", e)
+					}
+				} else {
+					console.log("localStorage not available")
+				}
+			});
+
+			$("#lab-form").on("submit", function() {
+				localStorage.clear();
+				saveInfo = false;
+				return true;
+			});
 		});
+
+		function loadCheckbox(name_class) {
+			var value = localStorage.getItem(name_class);
+			if (value == "yes") {
+				$("." + name_class).prop('checked', true);
+			} else {
+				$("." + name_class).prop('checked', false);
+			}
+		}
+
+		function saveCheckbox(name_class) {
+			if ($("." + name_class).is(":checked")) {
+				localStorage.setItem(name_class, "yes");
+			} else {
+				localStorage.setItem(name_class, "no");            
+			}
+		}
 	</script>
 </body>
 {% endblock %}

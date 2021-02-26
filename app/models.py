@@ -19,7 +19,7 @@ class Lab(models.Model):
     accept_undergrads = models.BooleanField()
     accept_grads = models.BooleanField()
     email = models.CharField(max_length=255)
-    website = models.CharField(max_length=255)
+    website = models.CharField(max_length=255, blank=True)
     mentors = models.BooleanField()
     funded = models.BooleanField()
     project_desc = models.TextField()

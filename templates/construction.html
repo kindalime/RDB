@@ -1,15 +1,24 @@
 {% extends "base.html" %}
 
-{% block title %}Construction{% endblock %}
+{% block title %}Under Construction{% endblock %}
 
 {% block content %}
 <head>
     <link href="/static/construction.css" rel="stylesheet">
 </head>
 
-<div class="square">
-    <div class="content">
-        <span id="message">We are hard at work building out RDB, check back soon!</span>
-    </div>
-  </div>
+{% if request.user.is_authenticated %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to RDB!</h1>
+    <p class="lead">Let's get started, to add a lab please click the buttom below.</p>
+    <a href="/lab/create"><button type="button" class="btn btn-primary btn-lg">Add a Lab</button></a>
+</div>
+{% else %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Under Construction</h1>
+    <p class="lead">We aren't ready for students quite yet, but Yale faculty can submit their labs after authentication.</p>
+    <a href="/accounts/login"><button type="button" class="btn btn-primary btn-lg">Login with CAS</button></a>
+</div>
+{% endif %}
+
 {% endblock %}
