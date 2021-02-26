@@ -36,7 +36,7 @@ def get_secret(setting, secrets=secrets):
 SECRET_KEY = get_secret('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'secure.its.yale.edu',
@@ -62,6 +62,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -69,7 +70,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_cas_ng.middleware.CASMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = (
