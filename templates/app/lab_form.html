@@ -14,7 +14,7 @@
 				{{ form.name.errors }}
 			</div>
 			<hr class="blue1" style="width: 100%">
-			<p class="mb-0 header5 no-space">All edits will be saved automatically. The Yale Research Database is currently in beta development; not all site features may be accessible, thank you for your patience!</p>
+			<p class="mb-0 header5 no-space">The Yale Research Database is currently in beta development; not all site features may be accessible, thank you for your patience! All edits will be saved automatically.</p>
 			<div class="d-flex justify-content-between row-to-col flex-wrap">
 				<div class="body3 m-3" style="margin-bottom: 0px !important;">
 					<div class="mt-3">
@@ -104,7 +104,15 @@
 						{{ form.project_desc | add_class:"word_count lab_desc" }}
 						{{ form.project_desc.errors }}
 					</div>
-					<div class="align-right sbody3"> <span id="display_count">0</span>/500 words</div>
+					<div class="sbody3" style="display: flex; justify-content: space-between;">
+						{% if object %}
+							<span class="align-left">Last Modified: {{ lab.modified_date }}</span>
+						{% else %}
+							<span class="align-left"></span>
+						{% endif %}
+						<span class="align-right"><span id="display_count">0</span>/1000 words</span>
+					</div>
+					<div class="align-right sbody3"> </div>
 				</div>
 			</div>
 			<hr class="blue1" style="width:100%">
@@ -123,7 +131,6 @@
 
 	<script>
 		$(document).ready(function() {
-			// var object = "{{ object }}" ? true : false;
 			var saveInfo = "{{ object }}" ? false : true;
 
 			if (!saveInfo) {
@@ -160,15 +167,19 @@
 			loadCheckbox('lab_grads', saveInfo);
 			loadCheckbox('lab_remote', saveInfo);
 			loadCheckbox('lab_on_campus', saveInfo);
+			
+			if(($(".word_count").val().match(/\S+/g)) != null) {
+				$('#display_count').text($(".word_count").val().match(/\S+/g).length);
+			}
 
 			$(".word_count").on('keyup', function() {
 				var words = 0;
 				if((this.value.match(/\S+/g)) != null) {
 					words = this.value.match(/\S+/g).length;
 				}
-				if(words > 500) {
-					// Split the string on first 500 words and rejoin on spaces
-					var trimmed = $(this).val().split(/\s+/, 500).join(" ");
+				if(words > 1000) {
+					// Split the string on first 1000 words and rejoin on spaces
+					var trimmed = $(this).val().split(/\s+/, 1000).join(" ");
 					// Add a space at the end to make sure more typing creates new words
 					$(this).val(trimmed + " ");
 				} else {
