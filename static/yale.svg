@@ -604,7 +604,7 @@
 <path d="M 592.97 645.71 C 600.98 645.47 608.99 645.66 617.00 645.60 C 742.34 645.63 867.66 645.65 993.00 645.64 C 1057.66 645.62 1122.34 645.56 1187.00 645.70 L 1187.00 668.00 L 592.87 668.00 C 592.93 660.57 592.78 653.14 592.97 645.71 Z" id="p599" />
 </defs>
 <g stroke-width="10pt">
-<use stroke="#ffffff" xlink:href="#p0" />
+<use stroke="#B4EFFF" xlink:href="#p0" />
 <use stroke="#faa742" xlink:href="#p1" />
 <use stroke="#412b2c" xlink:href="#p2" />
 <use stroke="#faa742" xlink:href="#p3" />
@@ -1206,7 +1206,7 @@
 <use stroke="#737977" xlink:href="#p599" />
 </g>
 <g>
-<use fill="#ffffff" xlink:href="#p0" />
+<use fill="#B4EFFF" xlink:href="#p0" />
 <use fill="#faa742" xlink:href="#p1" />
 <use fill="#412b2c" xlink:href="#p2" />
 <use fill="#faa742" xlink:href="#p3" />
