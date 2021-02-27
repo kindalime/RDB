@@ -10,7 +10,7 @@ from .models import Lab
 
 def index(request):
     labs = Lab.objects.all()
-    return render(request, "index.html", {'labs': labs})
+    return render(request, "construction.html", {'labs': labs})
 
 def about(request):
     return render(request, "about.html")
