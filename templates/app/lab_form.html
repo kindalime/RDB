@@ -14,7 +14,7 @@
 				{{ form.name.errors }}
 			</div>
 			<hr class="blue1" style="width: 100%">
-			<p class="mb-0 header5 no-space">All edits will be saved automatically. Not all site features may be accessible.</p>
+			<p class="mb-0 header5 no-space">All edits will be saved automatically. The Yale Research Database is currently in beta development; not all site features may be accessible, thank you for your patience!</p>
 			<div class="d-flex justify-content-between row-to-col flex-wrap">
 				<div class="body3 m-3" style="margin-bottom: 0px !important;">
 					<div class="mt-3">
@@ -104,7 +104,7 @@
 						{{ form.project_desc | add_class:"word_count lab_desc" }}
 						{{ form.project_desc.errors }}
 					</div>
-					<div class="align-right sbody3"> <span id="display_count">0</span>/500 </div>
+					<div class="align-right sbody3"> <span id="display_count">0</span>/500 words</div>
 				</div>
 			</div>
 			<hr class="blue1" style="width:100%">
@@ -267,7 +267,7 @@
 			$('#text-netid').tagsinput('add', netIDs[index]);
 		}
 
-		$(".lab_name").attr("placeholder", "E.g. Marvin Chun's Lab");
+		$(".lab_name").attr("placeholder", "E.g. Chang Lab");
 	</script>
 </body>
 {% endblock %}
