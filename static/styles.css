@@ -385,7 +385,7 @@ table {
 }
 
 table.dataTable.no-footer {
-  border-bottom: none !important;
+  border-bottom: 1px solid #dee2e6 !important;
 }
 
 #add-netid {

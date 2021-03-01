@@ -132,6 +132,22 @@
 	<script>
 		$(document).ready(function() {
 			var saveInfo = "{{ object }}" ? false : true;
+			var netid_error = "{{ pi_netid_error }}" ? true : false;
+
+			if (netid_error && $(".lab_netid").val() == "{{ prev_pi_netid }}") {
+				$(".lab_netid")[0].setCustomValidity("{{ pi_netid_error }}");
+				$(".lab_netid")[0].reportValidity();
+			}
+
+			$(".lab_netid").on('keyup', function() {
+				if (netid_error && $(".lab_netid").val() != "{{ prev_pi_netid }}") {
+					$(".lab_netid")[0].setCustomValidity("");
+					$(".lab_netid")[0].reportValidity();
+				} else if (netid_error && $(".lab_netid").val() == "{{ prev_pi_netid }}") {
+					$(".lab_netid")[0].setCustomValidity("{{ pi_netid_error }}");
+					$(".lab_netid")[0].reportValidity();
+				}
+			});
 
 			if (!saveInfo) {
 				$("#form-type").val('Update');

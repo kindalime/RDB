@@ -61,9 +61,12 @@ class LabCreate(LoginRequiredMixin, CreateView):
             edit.append(request.user.username)
 
         edit = list(set(list(filter(None, edit))))
+        pi_netid_exists = Lab.objects.filter(pi_id=form['pi_id'].value()).exists()
         
-        if form.is_valid():
+        if form.is_valid() and not pi_netid_exists:
             return self.form_valid(form, edit)
+        elif pi_netid_exists:
+            return render(request, 'app/lab_form.html', {'form': form, 'pi_netid_error': "PI NetID already in use", 'prev_pi_netid': form['pi_id'].value()})
         else:
             return self.form_invalid(form)
 
