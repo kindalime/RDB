@@ -36,7 +36,7 @@
                     <p>{{ lab.project_desc }}</p>
                 </div>
                 <div class="body3">
-                    Last Updated: {{ lab.last_updated }}
+                    Last Updated: {{ lab.modified_date|timesince }} ago
                 </div>
             </div>
         </div>
