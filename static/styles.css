@@ -355,7 +355,7 @@ tbody tr:hover {
 
 .label {
   display: inline;
-  padding: .3em .6em .3em;
+  padding: .2em .2em .2em .3em;
   font-weight: 700;
   line-height: 1;
   color: #fff;
@@ -365,8 +365,31 @@ tbody tr:hover {
   border-radius: .25em;
 }
 
+.card {
+  border: 1px solid #dee2e6 !important;
+  box-shadow: none !important;
+}
+
+td {
+  line-height: 100% !important;
+  vertical-align: middle !important;
+}
+
+.dtr-title {
+  width: 100%;
+  padding: 0.5em 0;
+}
+
+table {
+  border-radius: .25rem;
+}
+
+table.dataTable.no-footer {
+  border-bottom: none !important;
+}
+
 #add-netid {
-  outline:none !important;
+  outline: none !important;
   box-shadow: none !important;
 }
 

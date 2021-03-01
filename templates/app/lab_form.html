@@ -33,7 +33,7 @@
 					</div>
 					<div class="mt-3">
 						<p>Department:
-							{{ form.department }}
+							{{ form.department | add_class:"resizeselect" }}
 							{{ form.department.errors }}
 							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Which department is the lab in?" aria-hidden="true"></i>
 						</p>
@@ -56,7 +56,7 @@
 						<p>Mentoring:
 							{{ form.mentors | add_class:"lab_mentors" }}
 							{{ form.mentors.errors }}
-							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Does the lab have available mentors?" aria-hidden="true"></i>
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Are graduate students/postdocs available to mentor undergraduates in their research?" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
@@ -106,7 +106,7 @@
 					</div>
 					<div class="sbody3" style="display: flex; justify-content: space-between;">
 						{% if object %}
-							<span class="align-left">Last Modified: {{ lab.modified_date }}</span>
+							<span class="align-left">Last Modified: {{ lab.modified_date|timesince }} ago</span>
 						{% else %}
 							<span class="align-left"></span>
 						{% endif %}
@@ -119,7 +119,7 @@
 			<p class="mb-0 header5 no-space">To allow other individuals to edit this page, please enter their NetID:</p>
 			<div class="p-0 m-3 float-container">
 				<div class="mb-3">
-					<input id="text-netid" placeholder="NetID" value="" data-role="tagsinput" name="netID" type="text" autocomplete="off">
+					<input class="w-100" id="text-netid" placeholder="NetID" value="" data-role="tagsinput" name="netID" type="text" autocomplete="off">
 				</div>
 				<div class="float-child4">
 					<button id="add-netid" type="button" id="add" class="btn btn-outline-secondary btn-sm btn-block rounded-0 buttonblue">Add</button>
@@ -279,6 +279,40 @@
 		}
 
 		$(".lab_name").attr("placeholder", "E.g. Chang Lab");
+
+		(function($, window) {
+			var arrowWidth = 30;
+
+			$.fn.resizeselect = function(settings) {  
+				return this.each(function() { 
+
+				$(this).change(function(){
+					var $this = $(this);
+
+					// create test element
+					var text = $this.find("option:selected").text();
+					var $test = $("<span>").html(text).css({
+						"font-size": $this.css("font-size"), // ensures same size text
+						"visibility": "hidden"               // prevents FOUC
+					});
+
+
+					// add to parent, get width, and get out
+					$test.appendTo($this.parent());
+					var width = $test.width();
+					$test.remove();
+
+					// set select width
+					$this.width(width + arrowWidth);
+
+					// run on start
+				}).change();
+
+				});
+			};
+
+			$("select.resizeselect").resizeselect();
+		})(jQuery, window);
 	</script>
 </body>
 {% endblock %}
