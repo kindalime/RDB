@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+    PI View
+{% endblock %}
+
+{% block content %}
+<body class="w3-animate-opacity top-padding">
+            <div class="float-container mid-padding">
+                <div class="float-child body05 green">
+                    <img src="https://placeholder.com/" alt="profile pic">
+                    <div class="green" style="text-align:left">
+                        <p>{{ contact }}</p>
+                        <p>{{ website }}</p>
+                    </div>
+                </div>
+
+            <div class="float-child body 05 green">
+                <table style="text-align:left">
+                    <tr><th class="body05b">Publications</th></tr>
+                    <tr><td class="body3">aaa</td></tr>
+                    <tr><td class="body3">aaa</td></tr>
+                    <tr><td class="body3">aaa</td></tr>
+                </table>
+                <br /><br />
+                <table style="text-align:left">
+                    <tr><th class="body05b">Labs</th></tr>
+                    <tr><td class="body3">aaa</td></tr>
+                    <tr><td class="body3">aaa</td></tr>
+                    <tr><td class="body3">aaa</td></tr>
+                </table>
+            </div>
+
+</body>
+{% endblock %}
