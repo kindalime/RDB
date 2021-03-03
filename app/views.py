@@ -33,7 +33,8 @@ def random(request):
 def profile(request):
     user = User.objects.get(username=request.user)
     labs = Lab.objects.filter(edit__contains=[request.user])
-    return render(request, "profile.html", {'user': user, 'labs': labs})
+    alllabs = Lab.objects.all()
+    return render(request, "profile.html", {'user': user, 'labs': labs, 'alllabs': alllabs})
 
 class LabDetail(LoginRequiredMixin, DetailView):
     model = Lab
