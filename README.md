@@ -11,7 +11,7 @@ Search through 1400+ Yale faculty listings across 60+ fields of study. Learn abo
 
 If this section is here, there is currently a free remote database hooked up to the project. This is just to promote faster setup, if you have a local postgres server setup, please comment out the remote one in the `settings.py` database section.
 
-`secrets.json` is currently exposed just for faster development, once the project is preparing for production the `.gitignore` will be updated to exclude it.
+`secrets.json` is currently hidden, please reach out to recieve the file.
  
 ## macOS Setup
 
