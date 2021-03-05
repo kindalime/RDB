@@ -46,7 +46,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'app',
+    'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -102,10 +102,10 @@ WSGI_APPLICATION = 'rdb.wsgi.application'
 DATABASES = {
  'default': {
      'ENGINE': 'django.db.backends.postgresql_psycopg2',
-     'NAME': 'd70avvlg1acvsh',
-     'USER': 'tgkblmsihnnagw',
+     'NAME': 'd9rq53khm4nouj',
+     'USER': 'psieufzmelddne',
      'PASSWORD': get_secret('DB_PASSWORD'),
-     'HOST': 'ec2-107-20-104-234.compute-1.amazonaws.com',
+     'HOST': 'ec2-54-166-242-77.compute-1.amazonaws.com',
      'PORT': '5432',
  }
 }
@@ -177,3 +177,4 @@ if DEBUG:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
