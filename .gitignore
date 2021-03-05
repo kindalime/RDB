@@ -5,5 +5,5 @@ venv/
 *.csv
 *.db
 *.sqlite3
-# *.json
+*.json
 migrations/
