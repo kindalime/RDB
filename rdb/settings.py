@@ -25,7 +25,7 @@ if DEBUG:
     with open(os.path.join(BASE_DIR, 'secrets.json')) as secrets_file:
         secrets = json.load(secrets_file)
 
-def get_secret(setting, secrets=secrets):
+def get_secret(setting):
     """Get secret setting or fail with ImproperlyConfigured"""
     try:
         if DEBUG:
@@ -44,6 +44,7 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = get_secret('SECRET_KEY')
 
 ALLOWED_HOSTS = [
