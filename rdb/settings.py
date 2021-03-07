@@ -19,7 +19,7 @@ import json
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 if DEBUG:
     with open(os.path.join(BASE_DIR, 'secrets.json')) as secrets_file:
