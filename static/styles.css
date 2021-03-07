@@ -375,6 +375,10 @@ td {
   vertical-align: middle !important;
 }
 
+th {
+  font-size: .9rem;
+}
+
 .dtr-title {
   width: 100%;
   padding: 0.5em 0;
@@ -405,5 +409,11 @@ table.dataTable.no-footer {
 {
   .row-to-col {
     flex-direction: column;
+  }
+  th {
+    font-size: .9rem;
+  }
+  tr {
+    font-size: .8rem;
   }
 }

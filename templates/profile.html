@@ -29,53 +29,57 @@
         </div>
         <div class="col-md-8">
             <h1 class="text-sm-left text-center mt-0">Active Labs</h1>
-            <table id="labs" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Lab name</th>
-                        <th>Principal Investigator</th>
-                        <th>Edit/Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for lab in labs %}
+            <div class = "table-responsive">
+                <table id="labs" class="table table-hover table-striped table-bordered text-center" cellspacing="0" width="100%">
+                    <thead>
                         <tr>
-                            <td>{{lab.id}}</td>
-                            <td>{{lab.name}}</td>
-                            <td>{{lab.pi_name}}</td>
-                            <td style="text-align: center;">
-                                <button data-href="{% url 'lab-update' lab.pk %}" type="button" class="btn btn-primary btn-xs dt-edit click" style="margin-right:16px;">
-                                    <i class="fas fa-edit"></i></span>
-                                </button>
-                                <button data-href="{% url 'lab-delete' lab.pk %}" type="button" class="btn btn-danger btn-xs dt-delete click">
-                                    <i class="fas fa-trash"></i></span>
-                                </button>
-                            </td>
+                            <th scope = "col">ID</th>
+                            <th scope = "col">Lab name</th>
+                            <th scope = "col">Principal Investigator</th>
+                            <th scope = "col">Edit/Delete</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for lab in labs %}
+                            <tr>
+                                <td>{{lab.id}}</td>
+                                <td>{{lab.name}}</td>
+                                <td>{{lab.pi_name}}</td>
+                                <td style="text-align: center;">
+                                    <button data-href="{% url 'lab-update' lab.pk %}" type="button" class="btn btn-primary btn-xs dt-edit click" style="margin-right:16px;">
+                                        <i class="fas fa-edit"></i></span>
+                                    </button>
+                                    <button data-href="{% url 'lab-delete' lab.pk %}" type="button" class="btn btn-danger btn-xs dt-delete click">
+                                        <i class="fas fa-trash"></i></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
             {% if user.username == "ske8" %}
-            <h1 class="text-sm-left text-center">All Labs</h1>
-            <table id="alllabs" class="table table-striped table-bordered mt-3" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Lab name</th>
-                        <th>Principal Investigator</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for lab in alllabs %}
-                        <tr>
-                            <td>{{lab.id}}</td>
-                            <td>{{lab.name}}</td>
-                            <td>{{lab.pi_name}}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                <h1 class="text-sm-left text-center">All Labs</h1>
+                <div class = "responsive-table">
+                    <table id="alllabs" class="table table-striped table-bordered mt-3" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Lab name</th>
+                                <th>Principal Investigator</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for lab in alllabs %}
+                                <tr>
+                                    <td>{{lab.id}}</td>
+                                    <td>{{lab.name}}</td>
+                                    <td>{{lab.pi_name}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             {% endif %}
         </div>
         </div>
