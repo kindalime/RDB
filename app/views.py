@@ -33,8 +33,8 @@ def random(request):
 def profile(request):
     user = User.objects.get(username=request.user)
     labs = Lab.objects.filter(edit__contains=[request.user])
-    alllabs = Lab.objects.all()
-    return render(request, "profile.html", {'user': user, 'labs': labs, 'alllabs': alllabs})
+    all_labs = Lab.objects.all()
+    return render(request, "profile.html", {'user': user, 'labs': labs, 'all_labs': all_labs})
 
 class LabDetail(LoginRequiredMixin, DetailView):
     model = Lab
@@ -75,7 +75,7 @@ class LabCreate(LoginRequiredMixin, CreateView):
             return self.form_invalid(form)
 
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
+        if not request.user.is_staff:
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
 
@@ -85,11 +85,10 @@ class LabUpdate(LoginRequiredMixin, UpdateView):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
+        
         edit = request.POST.get("netID").split(',')
-
         if request.user.username not in edit:
             edit.append(request.user.username)
-        
         edit = list(set(list(filter(None, edit))))
 
         self.object.edit = edit
