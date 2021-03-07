@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+from django.core.exceptions import ImproperlyConfigured
 from pathlib import Path
 import os
 import json
@@ -23,25 +24,24 @@ with open(os.path.join(BASE_DIR, 'secrets.json')) as secrets_file:
 def get_secret(setting, secrets=secrets):
     """Get secret setting or fail with ImproperlyConfigured"""
     try:
-        return secrets[setting]
+        if DEBUG:
+            return secrets[setting]
+        else:
+            return os.environ[setting]
     except KeyError:
-        raise ImproperlyConfigured("Set the {} setting".format(setting))
-
+            raise ImproperlyConfigured("Set the {} setting".format(setting))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = '7h6$dls@0&^z!7s8&0(#nl7i1kctoony*7-83znqzyd&3&t%j$'
-# DB_PASSWORD = '4e354810647556c6688ddd1a85e1544fe0b17f097111021e4ad85e62c28592a1'
-SECRET_KEY = get_secret('SECRET_KEY')
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = get_secret('SECRET_KEY')
 
 ALLOWED_HOSTS = [
     '*',
 ]
-
 
 # Application definition
 
@@ -72,7 +72,7 @@ MIDDLEWARE = [
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'django_cas_ng.backends.CASBackend',
+    'app.backends.RDBCASBackend',
 )
 
 ROOT_URLCONF = 'rdb.urls'
@@ -95,32 +95,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rdb.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
  'default': {
      'ENGINE': 'django.db.backends.postgresql_psycopg2',
-     'NAME': 'd70avvlg1acvsh',
-     'USER': 'tgkblmsihnnagw',
+     'NAME': get_secret('DB_NAME'),
+     'USER': get_secret('DB_USER'),
      'PASSWORD': get_secret('DB_PASSWORD'),
-     'HOST': 'ec2-107-20-104-234.compute-1.amazonaws.com',
-     'PORT': '5432',
+     'HOST': get_secret('DB_HOST'),
+     'PORT': get_secret('DB_PORT'),
  }
 }
-
-# DATABASES = {
-#  'default': {
-#      'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#      'NAME': 'yura',
-#      'USER': 'yura',
-#      'PASSWORD': get_secret('DB_PASSWORD'),
-#      'HOST': 'localhost',
-#      'PORT': '',  
-#  }
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -140,7 +127,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 CAS_SERVER_URL = 'https://secure.its.yale.edu/cas/'
 
 CAS_APPLY_ATTRIBUTES_TO_USER = True
@@ -151,7 +137,7 @@ CAS_LOGOUT_COMPLETELY = False
 
 CAS_VERSION = '3'
 
-LOGIN_URL="/accounts/login/"
+LOGIN_URL = '/accounts/login/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -165,7 +151,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
