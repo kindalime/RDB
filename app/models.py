@@ -130,7 +130,9 @@ class Lab(models.Model):
     project_desc = models.TextField()
     search_vector = SearchVectorField(null=True, blank=True)
     objects = LabManager()
-    edit = ArrayField(models.CharField(max_length=50, blank=True, null=True), default=list, blank=True, null=True)
+    edit = ArrayField(models.CharField(max_length=255, blank=True, null=True), default=list, blank=True, null=True)
+    publications = ArrayField(models.TextField(blank=True, null=True), default=list, blank=True, null=True)
+    created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
     # Metadata

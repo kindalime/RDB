@@ -23,6 +23,32 @@
 
 }
 
+.form-title {
+  margin-bottom: 0.5rem !important;
+}
+
+.pub:hover {
+  color: #0f4d92;
+  cursor: pointer;
+}
+
+.pub-list {
+  list-style: none;
+  padding: 0;
+}
+
+.pub-task {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-title {
+  overflow-x: auto;
+  outline: none;
+  cursor: default;
+}
+
 /* "float-container" and "float-child" fix buttons on index*/
 .float-container {
     border: 3px solid #fff;

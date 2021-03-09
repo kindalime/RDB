@@ -96,8 +96,8 @@
 					</div>
 				</div>
 				<div></div>
-				<div class="body m-3 flex-grow-1" style="margin-bottom: 0px !important;">
-					<p>Lab/Research Group Description and Project Summaries:
+				<div class="desc-pub body m-3 flex-grow-1" style="margin-bottom: 0px !important;">
+					<p class="form-title">Lab/Research Group Description and Project Summaries:
 						<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="What is the main function of the lab/research group, what will students be doing, etc?" aria-hidden="true"></i>
 					</p>
 					<div>
@@ -112,7 +112,16 @@
 						{% endif %}
 						<span class="align-right"><span id="display_count">0</span>/1000 words</span>
 					</div>
-					<div class="align-right sbody3"> </div>
+					<div class="align-right sbody3"></div>
+					<p class="mt-3 form-title">Publications:</p>
+					<div class="publications" style="display: flex;">
+						<input type="text" placeholder="Either citation or DOI number" class="w-100 pub-input">
+						<div class="input-buttons" style="display: flex; justify-content: flex-end; margin-left: 15px !important;">
+						  <i class="pub add-pub fa fa-plus fa-2x"></i></a>
+						</div>
+					</div>
+					<ul class="pub-list">
+					</ul>
 				</div>
 			</div>
 			<hr class="blue1" style="width:100%">
@@ -239,6 +248,46 @@
 
 			$("#add-netid").on("click", function() {
 				$('#text-netid').tagsinput('add', $("#text-netid").val());
+			});
+
+			var pubCounter = 0;
+
+			var pubLists = "{{ object.publications|safe }}";
+
+			if(pubLists) {
+				pubLists = pubLists.replace(/'/g, '"');
+				pubLists = JSON.parse(pubLists);
+			}
+
+			for (index = 0; index < pubLists.length; index++) { 
+				var newPubItem = document.createElement('li');
+				$('.pub-list').append(newPubItem);
+				newPubItem.classList.add('pub-task');
+				newPubItem.innerHTML = '<input class="w-100 task-title" type="text" name="pubList_' + pubCounter + '" readonly>' +
+				'<a class="button" style="margin-left: 15px !important;"><i class="pub remove fas fa-trash fa-2x"></i></a>';
+				newPubItem.querySelector('.task-title').setAttribute('value', pubLists[index]);
+				pubCounter += 1;
+			}
+
+			$(".add-pub").on("click", function() {
+				var newPubItem = document.createElement('li');
+				if ($(".pub-input").val() != "") {
+					$('.pub-list').append(newPubItem);
+					newPubItem.classList.add('pub-task');
+					newPubItem.innerHTML = '<input class="w-100 task-title" type="text" name="pubList_' + pubCounter + '" readonly>' +
+					'<a class="button" style="margin-left: 15px !important;"><i class="pub remove fas fa-trash fa-2x"></i></a>';
+					newPubItem.querySelector('.task-title').setAttribute('value', $(".pub-input").val());
+					$(".pub-input").val("");
+					pubCounter += 1;
+				}
+			});
+
+			var pubList = document.querySelector(".pub-list");
+
+			pubList.addEventListener("click", function(event) {
+				if (event.target.matches('.remove')) {
+					event.target.closest('li').remove()
+				}
 			});
 
 			$('.bootstrap-tagsinput').on('keyup keypress', function(e) {
