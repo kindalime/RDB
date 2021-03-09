@@ -117,7 +117,7 @@
 					<div class="publications" style="display: flex;">
 						<input type="text" placeholder="Either citation or DOI number" class="w-100 pub-input">
 						<div class="input-buttons" style="display: flex; justify-content: flex-end; margin-left: 15px !important;">
-						  <i class="pub add-pub fa fa-plus fa-2x"></i></a>
+						  <i class="pub add-pub fa fa-plus fa-1x"></i></a>
 						</div>
 					</div>
 					<ul class="pub-list">
@@ -264,7 +264,7 @@
 				$('.pub-list').append(newPubItem);
 				newPubItem.classList.add('pub-task');
 				newPubItem.innerHTML = '<input class="w-100 task-title" type="text" name="pubList_' + pubCounter + '" readonly>' +
-				'<a class="button" style="margin-left: 15px !important;"><i class="pub remove fas fa-trash fa-2x"></i></a>';
+				'<a class="button" style="margin-left: 15px !important;"><i class="pub remove fas fa-trash fa-1x"></i></a>';
 				newPubItem.querySelector('.task-title').setAttribute('value', pubLists[index]);
 				pubCounter += 1;
 			}
@@ -275,7 +275,7 @@
 					$('.pub-list').append(newPubItem);
 					newPubItem.classList.add('pub-task');
 					newPubItem.innerHTML = '<input class="w-100 task-title" type="text" name="pubList_' + pubCounter + '" readonly>' +
-					'<a class="button" style="margin-left: 15px !important;"><i class="pub remove fas fa-trash fa-2x"></i></a>';
+					'<a class="button" style="margin-left: 15px !important;"><i class="pub remove fas fa-trash fa-1x"></i></a>';
 					newPubItem.querySelector('.task-title').setAttribute('value', $(".pub-input").val());
 					$(".pub-input").val("");
 					pubCounter += 1;

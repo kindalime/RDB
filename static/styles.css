@@ -27,8 +27,19 @@
   margin-bottom: 0.5rem !important;
 }
 
+.pub {
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  align-items: center;
+}
+
 .pub:hover {
-  color: #0f4d92;
+  background-color: #0f4d92;
+  color: white;
   cursor: pointer;
 }
 
