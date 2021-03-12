@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.conf import settings
 from .models import Lab
 
 def index(request):
@@ -36,6 +38,15 @@ def profile(request):
     all_labs = Lab.objects.all()
     return render(request, "profile.html", {'user': user, 'labs': labs, 'all_labs': all_labs})
 
+def email(request):
+    user = User.objects.get(username=request.user)
+    subject = 'Lab Created Successfully'
+    message = 'RDB has received your lab submission. Please retain this email for your records.'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [user.email,]
+    send_mail(subject, message, email_from, recipient_list)
+    return
+
 class LabDetail(LoginRequiredMixin, DetailView):
     model = Lab
     fields = '__all__'
@@ -46,9 +57,10 @@ class LabCreate(LoginRequiredMixin, CreateView):
     fields = '__all__'
     
 
-    def form_valid(self, form, edit):
+    def form_valid(self, form, edit, publications):
         self.object = form.save(commit=False)
         self.object.edit = edit
+        self.object.publications = publications
         self.object.save()
         return super().form_valid(form)
 
@@ -59,6 +71,7 @@ class LabCreate(LoginRequiredMixin, CreateView):
         """
         form = self.get_form()
         edit = request.POST.get("netID").split(',')
+        publications = [v for k, v in request.POST.items() if k.startswith('pubList_')]
 
         if request.user.username not in edit:
             edit.append(request.user.username)
@@ -70,7 +83,8 @@ class LabCreate(LoginRequiredMixin, CreateView):
             pi_netid_lab = pi_netid_lab[0].name
         
         if form.is_valid() and not pi_netid_exists:
-            return self.form_valid(form, edit)
+            email(request)
+            return self.form_valid(form, edit, publications)
         elif pi_netid_exists:
             return render(request, 'app/lab_form.html', {'form': form, 'pi_netid_error': "'" + pi_netid_lab + "'" + " is already associated with " + form['pi_id'].value() + ".", 'prev_pi_netid': form['pi_id'].value()})
         else:
@@ -93,7 +107,10 @@ class LabUpdate(LoginRequiredMixin, UpdateView):
             edit.append(request.user.username)
         edit = list(set(list(filter(None, edit))))
 
+        publications = [v for k, v in request.POST.items() if k.startswith('pubList_')]
+
         self.object.edit = edit
+        self.object.publications = publications
         self.object.save()
         return super().post(request, *args, **kwargs)
 
