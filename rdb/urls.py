@@ -1,5 +1,4 @@
 """rdb URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
 Examples:
@@ -34,10 +33,10 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path('lab/<int:pk>', views.LabDetail.as_view(), name='lab-detail'),
+    path('lab/<slug:slug>', views.LabDetail.as_view(), name='lab-detail'),
     path('lab/create/', views.LabCreate.as_view(), name='lab-create'),
-    path('lab/<int:pk>/update/', views.LabUpdate.as_view(), name='lab-update'),
-    path('lab/<int:pk>/delete/', views.LabDelete.as_view(), name='lab-delete'),
+    path('lab/<slug:slug>/update/', views.LabUpdate.as_view(), name='lab-update'),
+    path('lab/<slug:slug>/delete/', views.LabDelete.as_view(), name='lab-delete'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

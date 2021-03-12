@@ -39,10 +39,12 @@ def profile(request):
 class LabDetail(LoginRequiredMixin, DetailView):
     model = Lab
     fields = '__all__'
+    slug_url_kwarg = 'slug'
 
 class LabCreate(LoginRequiredMixin, CreateView):
     model = Lab
     fields = '__all__'
+    
 
     def form_valid(self, form, edit):
         self.object = form.save(commit=False)

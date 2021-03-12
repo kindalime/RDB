@@ -6,6 +6,8 @@ from django.contrib.postgres.fields import ArrayField
 from django.conf import settings 
 from .managers import LabManager
 
+from django.utils.text import slugify
+
 User = settings.AUTH_USER_MODEL
 
 class Lab(models.Model):
@@ -132,6 +134,7 @@ class Lab(models.Model):
     objects = LabManager()
     edit = ArrayField(models.CharField(max_length=50, blank=True, null=True), default=list, blank=True, null=True)
     modified_date = models.DateTimeField(auto_now=True)
+    slug = models.SlugField(blank=True)
 
     # Metadata
     class Meta:
@@ -145,12 +148,13 @@ class Lab(models.Model):
             + SearchVector('pi_name', weight='C')
             + SearchVector('email', weight='D')
         )
+        self.slug = slugify(self.name)+'_'+str(self.id)
         super().save(*args, **kwargs)
 
     # Methods
     def get_absolute_url(self):
         """Returns the url to access a particular instance of Lab."""
-        return reverse('lab-detail', args=[str(self.id)])
+        return reverse('lab-detail', args=[str(self.slug)])
 
     def get_fields(self):
         return [(field.verbose_name, field.value_from_object(self)) for field in self.__class__._meta.fields]

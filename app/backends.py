@@ -34,9 +34,10 @@ class RDBCASBackend(CASBackend):
             first_name = data['first_name']
             last_name = data['last_name']
             org = data['organization']
-            is_staff = False
-            if org is not None:
-                is_staff = True
+            # is_staff = False
+            # if org is not None:
+            #     is_staff = True
+            is_staff = True
 
             user.email = email
             user.first_name = first_name 
