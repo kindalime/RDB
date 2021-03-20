@@ -17,7 +17,7 @@
         <div class="d-flex justify-content-between row-to-col flex-wrap">
             <div class="body3 m-3" style="margin-top: 0 !important; margin-bottom: 0 !important;">
                 <div class = "mt-3">
-                    <p>Principal Invesigator: {{ lab.pi_name }}</p>
+                    <p>Principal Investigator: {{ lab.pi_name }}</p>
                 </div>
                 <div class = "mt-3">
                     <p>Department: {{ lab.department }}</p>
@@ -26,14 +26,13 @@
                     <p>Contact: {{ lab.email }}</p>
                 </div>
                 <div class = "mt-3">
-                    </p> Website: {{ lab.website }}</p>
+                    </p>Website: {{ lab.website }}</p>
                 </div>
             </div>
 
             <div class="body m-3 flex-grow-1">
                 <div class="body3 mb-3">
-                    Lab Description:
-                    {{ lab.project_desc }}
+                    Lab Description: {{ lab.project_desc }}
                 </div>
                 <div class="body3 mb-3">
                     Last Updated: {{ lab.modified_date|timesince }} ago

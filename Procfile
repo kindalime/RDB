@@ -1,1 +1,1 @@
-web: gunicorn --workers=2 --preload rdb.wsgi:application --log-file -
+web: gunicorn --workers=3 --preload rdb.wsgi:application --max-requests 1200 --log-file
