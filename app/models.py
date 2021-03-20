@@ -150,13 +150,13 @@ class Lab(models.Model):
             + SearchVector('pi_name', weight='C')
             + SearchVector('email', weight='D')
         )
-        self.slug = slugify(self.name)+'_'+str(self.id)
+        self.slug = slugify(self.name)+ '-' + str(self.id)
         super().save(*args, **kwargs)
 
     # Methods
     def get_absolute_url(self):
         """Returns the url to access a particular instance of Lab."""
-        return reverse('lab-detail', args=[str(self.slug)])
+        return reverse('lab-detail', args=[self.slug])
 
     def get_fields(self):
         return [(field.verbose_name, field.value_from_object(self)) for field in self.__class__._meta.fields]

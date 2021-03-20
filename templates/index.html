@@ -18,7 +18,7 @@
         </thead>
         <tbody>
             {% for lab in labs %}
-                <tr data-href="{% url 'lab-detail' lab.pk %}">
+                <tr data-href="{% url 'lab-detail' lab.slug %}">
                     <td>
                         <button type="button" class="btn btn-success btn-xs dt-add" style="margin-right:10px;">
                         <i class="fas fa-plus" aria-hidden="true"></i>

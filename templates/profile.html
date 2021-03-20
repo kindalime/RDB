@@ -40,14 +40,14 @@
                     </thead>
                     <tbody>
                         {% for lab in labs %}
-                            <tr>
+                            <tr class="click" data-href="{% url 'lab-detail' lab.slug %}">
                                 <td>{{lab.name}}</td>
                                 <td>{{lab.pi_name}}</td>
                                 <td style="text-align: center;">
-                                    <button data-href="{% url 'lab-update' lab.pk %}" type="button" class="btn btn-primary btn-xs dt-edit click" style="margin-right:16px;">
+                                    <button data-href="{% url 'lab-update' lab.slug %}" type="button" class="btn btn-primary btn-xs dt-edit click" style="margin-right:16px;">
                                         <i class="fas fa-edit"></i></span>
                                     </button>
-                                    <button data-href="{% url 'lab-delete' lab.pk %}" type="button" class="btn btn-danger btn-xs dt-delete click">
+                                    <button data-href="{% url 'lab-delete' lab.slug %}" type="button" class="btn btn-danger btn-xs dt-delete click">
                                         <i class="fas fa-trash"></i></span>
                                     </button>
                                 </td>
@@ -69,7 +69,7 @@
                         </thead>
                         <tbody>
                             {% for lab in all_labs %}
-                                <tr class="click" data-href="{% url 'lab-detail' lab.pk %}">
+                                <tr class="click" data-href="{% url 'lab-detail' lab.slug %}">
                                     <td>{{lab.id}}</td>
                                     <td>{{lab.name}}</td>
                                     <td>{{lab.pi_name}}</td>

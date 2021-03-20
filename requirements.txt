@@ -4,3 +4,4 @@ django-cas-ng
 django-widget-tweaks
 psycopg2
 gunicorn
+habanero

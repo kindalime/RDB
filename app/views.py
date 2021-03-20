@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import Lab
+from habanero import cn
+
 
 def index(request):
     labs = Lab.objects.all()
@@ -24,9 +26,7 @@ def search(request):
     query = request.GET.get("q", None)
     if not query:
         return HttpResponseRedirect("/")
-
     labs = Lab.objects.search(query)
-
     return render(request, 'construction.html', {'labs': labs})
 
 def random(request):
@@ -41,7 +41,10 @@ def profile(request):
 def email(request):
     user = User.objects.get(username=request.user)
     subject = 'Lab Created Successfully'
-    message = 'RDB has received your lab submission. Please retain this email for your records.'
+    message = '''RDB has received your lab submission. Please retain this email for your records.\n
+    \n
+    Kind regards,\n
+    The RDB Team'''
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [user.email,]
     send_mail(subject, message, email_from, recipient_list)
@@ -50,13 +53,11 @@ def email(request):
 class LabDetail(LoginRequiredMixin, DetailView):
     model = Lab
     fields = '__all__'
-    slug_url_kwarg = 'slug'
 
 class LabCreate(LoginRequiredMixin, CreateView):
     model = Lab
     fields = '__all__'
     
-
     def form_valid(self, form, edit, publications):
         self.object = form.save(commit=False)
         self.object.edit = edit
@@ -71,7 +72,7 @@ class LabCreate(LoginRequiredMixin, CreateView):
         """
         form = self.get_form()
         edit = request.POST.get("netID").split(',')
-        publications = [v for k, v in request.POST.items() if k.startswith('pubList_')]
+        publications = [self.detectDOI(v) for k, v in request.POST.items() if k.startswith('pubList_')]
 
         if request.user.username not in edit:
             edit.append(request.user.username)
@@ -83,7 +84,7 @@ class LabCreate(LoginRequiredMixin, CreateView):
             pi_netid_lab = pi_netid_lab[0].name
         
         if form.is_valid() and not pi_netid_exists:
-            email(request)
+            # email(request)
             return self.form_valid(form, edit, publications)
         elif pi_netid_exists:
             return render(request, 'app/lab_form.html', {'form': form, 'pi_netid_error': "'" + pi_netid_lab + "'" + " is already associated with " + form['pi_id'].value() + ".", 'prev_pi_netid': form['pi_id'].value()})
@@ -94,6 +95,13 @@ class LabCreate(LoginRequiredMixin, CreateView):
         if not request.user.is_authenticated:
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
+    
+    def detectDOI(self, DOI):
+        try:
+            APA = str(cn.content_negotiation(ids = DOI, format = "text", style = "apa")).strip("', /\n")
+        except:
+            APA = DOI
+        return APA
 
 class LabUpdate(LoginRequiredMixin, UpdateView):
     model = Lab
@@ -107,7 +115,7 @@ class LabUpdate(LoginRequiredMixin, UpdateView):
             edit.append(request.user.username)
         edit = list(set(list(filter(None, edit))))
 
-        publications = [v for k, v in request.POST.items() if k.startswith('pubList_')]
+        publications = [self.detectDOI(v) for k, v in request.POST.items() if k.startswith('pubList_')]
 
         self.object.edit = edit
         self.object.publications = publications
@@ -118,6 +126,13 @@ class LabUpdate(LoginRequiredMixin, UpdateView):
         if request.user.username not in self.get_object().edit:
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
+    
+    def detectDOI(self, DOI):
+        try:
+            APA = str(cn.content_negotiation(ids = DOI, format = "text", style = "apa")).strip("', /\n")
+        except:
+            APA = DOI
+        return APA
 
 class LabDelete(LoginRequiredMixin, DeleteView):
     model = Lab

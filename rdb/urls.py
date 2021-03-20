@@ -33,8 +33,8 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path('lab/<slug:slug>', views.LabDetail.as_view(), name='lab-detail'),
     path('lab/create/', views.LabCreate.as_view(), name='lab-create'),
+    path('lab/<slug:slug>/', views.LabDetail.as_view(), name='lab-detail'),
     path('lab/<slug:slug>/update/', views.LabUpdate.as_view(), name='lab-update'),
     path('lab/<slug:slug>/delete/', views.LabDelete.as_view(), name='lab-delete'),
 ]

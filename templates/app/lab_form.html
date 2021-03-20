@@ -9,7 +9,7 @@
 		{% csrf_token %}
 		<div class="mid-padding left d-flex flex-column">
 			<div class="mt-3 header2 d-flex row-to-col flex-row flex-wrap">
-				<p>Lab/Research Group Name:</p>
+				<p>Lab/Research Group Name*:</p>
 				{{ form.name | add_class:"w-100 lab_name" }}
 				{{ form.name.errors }}
 			</div>
@@ -18,28 +18,28 @@
 			<div class="d-flex justify-content-between row-to-col flex-wrap">
 				<div class="body3 m-3" style="margin-bottom: 0px !important;">
 					<div class="mt-3">
-						<p>PI:
+						<p>PI*:
 							{{ form.pi_name | add_class:"lab_pi" }}
 							{{ form.pi_name.errors }}
 							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Principal Investigator's (PI) first and last name" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
-						<p>PI NetID:
+						<p>PI NetID*:
 							{{ form.pi_id | add_class:"lab_netid" }}
 							{{ form.pi_id.errors }}
 							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Principal Investigator's (PI) NetID" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
-						<p>Department:
+						<p>Department*:
 							{{ form.department | add_class:"resizeselect" }}
 							{{ form.department.errors }}
 							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Which department is the lab in?" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
-						<p>Email:
+						<p>Email*:
 							{{ form.email | add_class:"lab_email" }}
 							{{ form.email.errors }}
 							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Which email can interested students contact?" aria-hidden="true"></i>
@@ -97,7 +97,7 @@
 				</div>
 				<div></div>
 				<div class="desc-pub body m-3 flex-grow-1" style="margin-bottom: 0px !important;">
-					<p class="form-title">Lab/Research Group Description and Project Summaries:
+					<p class="form-title">Lab/Research Group Description and Project Summaries*:
 						<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="What is the main function of the lab/research group, what will students be doing, etc?" aria-hidden="true"></i>
 					</p>
 					<div>
@@ -113,7 +113,9 @@
 						<span class="align-right"><span id="display_count">0</span>/1000 words</span>
 					</div>
 					<div class="align-right sbody3"></div>
-					<p class="mt-3 form-title">Publications:</p>
+					<p class="mt-3 form-title">Publications:
+						<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Enter a APA citation or DOI (e.g. 10.1037/0003-066X.59.1.29)" aria-hidden="true"></i>
+					</p>
 					<div class="publications" style="display: flex;">
 						<input type="text" placeholder="Either citation or DOI number" class="w-100 pub-input">
 						<div class="input-buttons" style="display: flex; justify-content: flex-end; margin-left: 15px !important;">
@@ -203,9 +205,7 @@
 					words = this.value.match(/\S+/g).length;
 				}
 				if(words > 1000) {
-					// Split the string on first 1000 words and rejoin on spaces
 					var trimmed = $(this).val().split(/\s+/, 1000).join(" ");
-					// Add a space at the end to make sure more typing creates new words
 					$(this).val(trimmed + " ");
 				} else {
 					$('#display_count').text(words);
@@ -241,6 +241,7 @@
 			});
 
 			$("#lab-form").on("submit", function() {
+				$('#form-type').attr('disabled', true);
 				localStorage.clear();
 				saveInfo = false;
 				return true;
@@ -263,7 +264,7 @@
 				var newPubItem = document.createElement('li');
 				$('.pub-list').append(newPubItem);
 				newPubItem.classList.add('pub-task');
-				newPubItem.innerHTML = '<input class="w-100 task-title" type="text" name="pubList_' + pubCounter + '" readonly>' +
+				newPubItem.innerHTML = '<input class="w-100 task-title" type="text" name="pubList_' + pubCounter + '">' +
 				'<a class="button" style="margin-left: 15px !important;"><i class="pub remove fas fa-trash fa-1x"></i></a>';
 				newPubItem.querySelector('.task-title').setAttribute('value', pubLists[index]);
 				pubCounter += 1;
@@ -339,7 +340,7 @@
 
 		$('#text-netid').tagsinput('add', '');
 
-		for (index = 0; index < netIDs.length; index++) { 
+		for (index = 0; index < netIDs.length; index++) {
 			$('#text-netid').tagsinput('add', netIDs[index]);
 		}
 
@@ -354,23 +355,18 @@
 				$(this).change(function(){
 					var $this = $(this);
 
-					// create test element
 					var text = $this.find("option:selected").text();
 					var $test = $("<span>").html(text).css({
-						"font-size": $this.css("font-size"), // ensures same size text
-						"visibility": "hidden"               // prevents FOUC
+						"font-size": $this.css("font-size"),
+						"visibility": "hidden"
 					});
 
-
-					// add to parent, get width, and get out
 					$test.appendTo($this.parent());
 					var width = $test.width();
 					$test.remove();
 
-					// set select width
 					$this.width(width + arrowWidth);
 
-					// run on start
 				}).change();
 
 				});
