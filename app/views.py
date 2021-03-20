@@ -36,7 +36,8 @@ def profile(request):
     user = User.objects.get(username=request.user)
     labs = Lab.objects.filter(edit__contains=[request.user])
     all_labs = Lab.objects.all()
-    return render(request, "profile.html", {'user': user, 'labs': labs, 'all_labs': all_labs})
+    liked_labs = []
+    return render(request, "profile.html", {'user': user, 'labs': labs, 'all_labs': all_labs, 'liked_labs': liked_labs})
 
 def email(request):
     user = User.objects.get(username=request.user)

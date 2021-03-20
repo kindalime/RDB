@@ -28,38 +28,63 @@
             </div>
         </div>
         <div class="col-md-8">
-            <h1 class="text-sm-left text-center mt-0">Active Labs</h1>
-            <div class = "table-responsive">
-                <table id="labs" class="table table-hover table-striped table-bordered text-center" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th scope = "col">Lab name</th>
-                            <th scope = "col">Principal Investigator</th>
-                            <th scope = "col">Edit/Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for lab in labs %}
-                            <tr class="click" data-href="{% url 'lab-detail' lab.slug %}">
-                                <td>{{lab.name}}</td>
-                                <td>{{lab.pi_name}}</td>
-                                <td style="text-align: center;">
-                                    <button data-href="{% url 'lab-update' lab.slug %}" type="button" class="btn btn-primary btn-xs dt-edit click" style="margin-right:16px;">
-                                        <i class="fas fa-edit"></i></span>
-                                    </button>
-                                    <button data-href="{% url 'lab-delete' lab.slug %}" type="button" class="btn btn-danger btn-xs dt-delete click">
-                                        <i class="fas fa-trash"></i></span>
-                                    </button>
-                                </td>
+            {% if user.is_staff == False %}
+                <h1 class="text-sm-left text-center mt-0">Liked Labs</h1>
+                <div class = "table-responsive">
+                    <table id="liked-labs" class="table table-hover table-striped table-bordered text-center" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th scope = "col">Lab name</th>
+                                <th scope = "col">Principal Investigator</th>
+                                <th scope = "col">Description</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {% for lab in liked_labs %}
+                                <tr class="click" data-href="{% url 'lab-detail' lab.slug %}">
+                                    <td>{{lab.name}}</td>
+                                    <td>{{lab.pi_name}}</td>
+                                    <td>{{lab.project_desc}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <h1 class="text-sm-left text-center mt-0">Active Labs</h1>
+                <div class = "table-responsive">
+                    <table id="active-labs" class="table table-hover table-striped table-bordered text-center" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th scope = "col">Lab name</th>
+                                <th scope = "col">Principal Investigator</th>
+                                <th scope = "col">Edit/Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for lab in labs %}
+                                <tr class="click" data-href="{% url 'lab-detail' lab.slug %}">
+                                    <td>{{lab.name}}</td>
+                                    <td>{{lab.pi_name}}</td>
+                                    <td style="text-align: center;">
+                                        <button data-href="{% url 'lab-update' lab.slug %}" type="button" class="btn btn-primary btn-xs dt-edit click" style="margin-right:16px;">
+                                            <i class="fas fa-edit"></i></span>
+                                        </button>
+                                        <button data-href="{% url 'lab-delete' lab.slug %}" type="button" class="btn btn-danger btn-xs dt-delete click">
+                                            <i class="fas fa-trash"></i></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
             {% if user.username == "ske8" %}
                 <h1 class="text-sm-left text-center">All Labs</h1>
                 <div class = "responsive-table">
-                    <table id="all_labs" class="table table-striped table-bordered mt-3" cellspacing="0" width="100%">
+                    <table id="all-labs" class="table table-striped table-bordered mt-3" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -86,14 +111,21 @@
 
 <script>
     $(document).ready(function() {
-        $('#labs').DataTable({
+        $('#liked-labs').DataTable({
             rowReorder: {
                 selector: 'td:nth-child(2)'
             },
             responsive: true,
         });
 
-        $('#all_labs').DataTable({
+        $('#active-labs').DataTable({
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            responsive: true,
+        });
+
+        $('#all-labs').DataTable({
             rowReorder: {
                 selector: 'td:nth-child(2)'
             },
