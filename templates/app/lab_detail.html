@@ -32,7 +32,7 @@
                 {% endif %}
             </div>
 
-            <div class="body m-3 flex-grow-1">
+            <div class="body m-3 flex-grow-1" style="margin-bottom: 0 !important; margin-top: 0 !important;">
                 <div class="body3 mb-3">
                     Lab Description: {{ lab.project_desc }}
                 </div>
@@ -50,7 +50,7 @@
             </div>
         </div>
         
-        <div class="body m-3 flex-grow-1" style="margin-bottom: 0 !important; margin-top: 0 !important; display:flex; flex-direction: row;">
+        <div class="body m-3 flex-grow-1 d-flex flex-column d-sm-flex flex-sm-row" style="margin-bottom: 0 !important; margin-top: 0 !important;">
             {% if lab.mentors %}
                 <h4><span style="margin-right:1rem;" class="badge badge-success">Mentors</span></h4>
             {% else %}
@@ -89,7 +89,7 @@
         </div>
 
         <hr class="blue1" style = "width: 100%">
-        This view is currently under development. Soon you will have the ability to upload photos, create application forms, and so much more. If you have any suggestions, please contact us at yura@yale.edu!
+        <p class="mb-3 header5 no-space">This view is currently under development. Soon you will have the ability to upload photos, create application forms, and so much more. If you have any suggestions, please contact us at yura@yale.edu!</p>
     </div>
     </body>
 {% endblock %}
