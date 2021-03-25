@@ -25,9 +25,11 @@
                 <div class = "mt-3">
                     <p>Contact: {{ lab.email }}</p>
                 </div>
+                {% if lab.accept_undergrads %}
                 <div class = "mt-3">
                     </p>Website: {{ lab.website }}</p>
                 </div>
+                {% endif %}
             </div>
 
             <div class="body m-3 flex-grow-1">
@@ -37,13 +39,53 @@
                 <div class="body3 mb-3">
                     Last Updated: {{ lab.modified_date|timesince }} ago
                 </div>
+                {% if lab.publications %}
                 <div class="body3 mb-3">
                     Publications:
                     {% for publication in lab.publications %}
                         {{ publication }}
                     {% endfor %}
                 </div>
+                {% endif %}
             </div>
+        </div>
+        
+        <div class="body m-3 flex-grow-1" style="margin-bottom: 0 !important; margin-top: 0 !important; display:flex; flex-direction: row;">
+            {% if lab.mentors %}
+                <h4><span style="margin-right:1rem;" class="badge badge-success">Mentors</span></h4>
+            {% else %}
+                <h4><span style="margin-right:1rem;" class="badge badge-danger">Mentors</span></h4>
+            {% endif %}
+
+            {% if lab.funded %}
+            <h4><span style="margin-right:1rem;" class="badge badge-success">Funded</span></h4>
+            {% else %}
+                <h4><span style="margin-right:1rem;" class="badge badge-danger">Funded</span></h4>
+            {% endif %}
+        
+            {% if lab.accept_undergrads %}
+            <h4><span style="margin-right:1rem;" class="badge badge-success">Undergraduates</span></h4>
+            {% else %}
+                <h4><span style="margin-right:1rem;" class="badge badge-danger">Undergraduates</span></h4>
+            {% endif %}
+
+            {% if lab.accept_grads %}
+            <h4><span style="margin-right:1rem;" class="badge badge-success">Graduates</span></h4>
+            {% else %}
+                <h4><span style="margin-right:1rem;" class="badge badge-danger">Graduates</span></h4>
+            {% endif %}
+
+            {% if lab.work_remote %}
+            <h4><span style="margin-right:1rem;" class="badge badge-success">Remote</span></h4>
+            {% else %}
+                <h4><span style="margin-right:1rem;" class="badge badge-danger">Remote</span></h4>
+            {% endif %}
+
+            {% if lab.work_in_person %}
+            <h4><span style="margin-right:1rem;" class="badge badge-success">On-Campus</span></h4>
+            {% else %}
+                <h4><span style="margin-right:1rem;" class="badge badge-danger">On-Campus</span></h4>
+            {% endif %}
         </div>
 
         <hr class="blue1" style = "width: 100%">
