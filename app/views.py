@@ -93,7 +93,7 @@ class LabCreate(LoginRequiredMixin, CreateView):
             return self.form_invalid(form)
 
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
+        if not request.user.is_staff:
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
     
