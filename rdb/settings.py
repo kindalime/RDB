@@ -33,7 +33,7 @@ def get_secret(setting):
         else:
             return os.environ[setting]
     except KeyError:
-            raise ImproperlyConfigured("Set the {} setting. Debug set to False?".format(setting))
+            raise ImproperlyConfigured("Set the {} setting. Is DEBUG in settings.py set to True?".format(setting))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
