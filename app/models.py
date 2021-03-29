@@ -117,7 +117,7 @@ class Lab(models.Model):
                     ("WomensGenderSexualityStudies", "Women’s, Gender, & Sexuality Studies")]
 
     # Fields
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=50)
     pi_name = models.CharField(max_length=255)
     pi_id = models.CharField(max_length=255)
     department = models.CharField(max_length=255, choices=departments)
