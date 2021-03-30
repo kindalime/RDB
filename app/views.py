@@ -14,7 +14,7 @@ from habanero import cn
 
 def index(request):
     labs = Lab.objects.all()
-    return render(request, "construction.html", {'labs': labs})
+    return render(request, "construction.html", {'labs': len(labs) + 50})
 
 def about(request):
     return render(request, "about.html")
@@ -27,7 +27,7 @@ def search(request):
     if not query:
         return HttpResponseRedirect("/")
     labs = Lab.objects.search(query)
-    return render(request, 'construction.html', {'labs': labs})
+    return render(request, "construction.html", {'labs': len(labs) + 50})
 
 def random(request):
     return HttpResponseRedirect(Lab.objects.order_by('?').first().get_absolute_url())
