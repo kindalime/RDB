@@ -100,7 +100,7 @@
             responsive: true,
         });
 
-        $('.click').click(function(){
+        $(document).on('click', '.click', function(){
             window.location = $(this).data('href');
             return false;
         });
