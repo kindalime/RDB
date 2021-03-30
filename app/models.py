@@ -136,7 +136,7 @@ class Lab(models.Model):
     publications = ArrayField(models.TextField(blank=True, null=True), default=list, blank=True, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(blank=True, max_length=255)
 
     # Metadata
     class Meta:
