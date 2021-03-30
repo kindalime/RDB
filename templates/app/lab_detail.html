@@ -42,9 +42,11 @@
                 {% if lab.publications %}
                 <div class="body3 mb-3">
                     Recent Publications:
-                    {% for publication in lab.publications %}
-                        {{ publication }}
-                    {% endfor %}
+                    <ol>
+                        {% for publication in lab.publications %}
+                            <li>{{ publication }}</li>
+                        {% endfor %}
+                    </ol>
                 </div>
                 {% endif %}
             </div>
