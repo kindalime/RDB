@@ -10,15 +10,26 @@
 {% if request.user.is_authenticated %}
 <div class="jumbotron text-center">
     <h1 class="display-4">Under Construction</h1>
+    {% if labs %}
+        <p class="lead"><span class="font-weight-bold text-warning">{{labs}}+</span> Yale Labs and Research Groups currently hosted on RDB</p>
+    {% endif %}
+    <hr class="my-4">
     <p class="lead">To list your lab on the Yale Research Database, please click the button below.</p>
-    <a href="/lab/create"><button type="button" class="btn btn-primary btn-lg">Add Lab</button></a>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="/lab/create" role="button">Add Lab</a>
+    </p>
 </div>
 {% else %}
 <div class="jumbotron text-center">
     <h1 class="display-4">Under Construction</h1>
+    {% if labs %}
+        <p class="lead"><span class="font-weight-bold text-warning">{{labs}}+</span> Yale Labs and Research Groups currently hosted on RDB</p>
+    {% endif %}
+    <hr class="my-4">
     <p class="lead">We aren't ready for students quite yet, but Yale faculty can submit their labs after authentication.</p>
-    <a href="/accounts/login"><button type="button" class="btn btn-primary btn-lg">Login with CAS</button></a>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="/accounts/login" role="button">Login with CAS</a>
+    </p>
 </div>
 {% endif %}
-
 {% endblock %}
