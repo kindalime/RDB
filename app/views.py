@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import Lab
 from habanero import cn
+from rdb.settings import DEBUG
 
 
 def index(request):
@@ -93,9 +94,14 @@ class LabCreate(LoginRequiredMixin, CreateView):
             return self.form_invalid(form)
 
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_staff:
-            return self.handle_no_permission()
-        return super().dispatch(request, *args, **kwargs)
+        if DEBUG:
+            if not request.user.is_authenticated:
+                return self.handle_no_permission()
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            if not request.user.is_staff:
+                return self.handle_no_permission()
+            return super().dispatch(request, *args, **kwargs)
     
     def detectDOI(self, DOI):
         try:
