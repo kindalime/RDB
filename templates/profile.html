@@ -65,6 +65,7 @@
                                 <th>ID</th>
                                 <th>Lab name</th>
                                 <th>Principal Investigator</th>
+                                <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,6 +74,11 @@
                                     <td>{{lab.id}}</td>
                                     <td>{{lab.name}}</td>
                                     <td>{{lab.pi_name}}</td>
+                                    <td style="text-align: center;">
+                                        <button data-href="{% url 'lab-update' lab.slug %}" type="button" class="btn btn-primary btn-xs dt-edit click">
+                                            <i class="fas fa-edit"></i></span>
+                                        </button>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
