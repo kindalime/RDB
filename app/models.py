@@ -13,7 +13,8 @@ User = settings.AUTH_USER_MODEL
 class Lab(models.Model):
     """A typical class defining a model, derived from the Model class."""
     # TODO: get department choices and program in here
-    departments = [("CellBiology", "Cell Biology"),
+    departments = [("Chemistry", "Chemistry"),
+                    ("CellBiology", "Cell Biology"),
                     ("ComputationalBiologyBioinformatics", "Computational Biology & Bioinformatics"),
                     ("EcologyEvolutionaryBiology", "Ecology & Evolutionary Biology"),
                     ("ForestryEnvironmentalStudies", "Forestry & Environmental Studies"),
