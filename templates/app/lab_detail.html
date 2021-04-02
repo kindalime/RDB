@@ -27,7 +27,7 @@
                 </div>
                 {% if lab.website %}
                 <div class = "mt-3">
-                    <p>Website: <a href="{{lab.website}}" style="color:#0645AD ">{{ lab.website }}</a></p>
+                    <p>Website: <a class="lab-website" href="{{lab.website}}" style="color:#0645AD ">{{ lab.website }}</a></p>
                 </div>
                 {% endif %}
             </div>
@@ -93,5 +93,18 @@
         <hr class="blue1" style = "width: 100%">
         <p class="mb-3 header5 no-space">This view is currently under development. Soon you will have the ability to upload photos, create application forms, and so much more.</p>
     </div>
+
+    <script>
+        var url = "{{ lab.website }}";
+        if (!!url && !!url.trim()) {
+            url = url.trim();
+            if (!/^(https?:)?\/\//i.test(url)) {
+                url = 'http://' + url;
+            }
+        }
+
+        $(".lab-website").attr("href", url);
+    </script>
+
     </body>
 {% endblock %}
