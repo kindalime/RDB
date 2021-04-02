@@ -56,7 +56,28 @@
                     </tbody>
                 </table>
             </div>
-            {% if user.username == "ske8" %}
+            {% if user.is_superuser %}
+                <h1 class="text-sm-left text-center">Add Faculty</h1>
+                <form action="/staff">
+                    <div class="form-row align-items-center">
+                        <div class="col-auto">
+                            <label class="sr-only" for="inlineFormInputGroup"></label>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">netID</div>
+                                    </div>
+                                <input type="text" class="form-control" name="netid" id="inlineFormInputGroup" placeholder="{{user.username}}">
+                                </div>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                        </div>
+                    </div>
+                    {% if faculty_message %}
+                        <text class="text-success">{{faculty_message}}</text>
+                    {% endif %}
+                </form>
+
                 <h1 class="text-sm-left text-center">All Labs</h1>
                 <div class = "responsive-table">
                     <table id="all_labs" class="table table-striped table-bordered mt-3" cellspacing="0" width="100%">

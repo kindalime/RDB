@@ -33,6 +33,32 @@ def search(request):
 def random(request):
     return HttpResponseRedirect(Lab.objects.order_by('?').first().get_absolute_url())
 
+def staff(request):
+    if not request.user.is_superuser:
+        return self.handle_no_permission()
+    
+    try:
+        netid = request.GET.get("netid", None)
+        user = User.objects.get(username=netid)
+        user.is_staff = True
+        user.save()
+        
+        user = User.objects.get(username=request.user)
+        labs = Lab.objects.filter(edit__contains=[request.user])
+        all_labs = Lab.objects.all()
+        liked_labs = labs
+        return render(request, "profile.html", {'user': user, 'labs': labs, 
+                                                'all_labs': all_labs, 'liked_labs': liked_labs,
+                                                'faculty_message': netid + ' has been successfully added as faculty.'})
+    except:
+        user = User.objects.get(username=request.user)
+        labs = Lab.objects.filter(edit__contains=[request.user])
+        all_labs = Lab.objects.all()
+        liked_labs = labs
+        return render(request, "profile.html", {'user': user, 'labs': labs, 
+                                                'all_labs': all_labs, 'liked_labs': liked_labs,
+                                                'faculty_message': netid + ' has caused an error.'})
+        
 def profile(request):
     user = User.objects.get(username=request.user)
     labs = Lab.objects.filter(edit__contains=[request.user])
