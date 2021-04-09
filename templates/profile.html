@@ -44,11 +44,14 @@
                                 <td>{{lab.name}}</td>
                                 <td>{{lab.pi_name}}</td>
                                 <td style="text-align: center;">
-                                    <button data-href="{% url 'lab-update' lab.slug %}" type="button" class="btn btn-primary btn-xs dt-edit click" style="margin-right:16px;">
+                                    <button data-href="{% url 'lab-update' lab.slug %}" type="button" class="btn btn-success btn-xs dt-edit click" style="margin-right:16px;">
                                         <i class="fas fa-edit"></i></span>
                                     </button>
-                                    <button data-href="{% url 'lab-delete' lab.slug %}" type="button" class="btn btn-danger btn-xs dt-delete click">
+                                    <button data-href="{% url 'lab-delete' lab.slug %}" type="button" class="btn btn-danger btn-xs dt-delete click" style="margin-right:16px;">
                                         <i class="fas fa-trash"></i></span>
+                                    </button>
+                                    <button data-href="{% url 'lab-detail' lab.slug %}" type="button" class="btn btn-primary btn-xs dt-delete click">
+                                        <i class="fas fa-eye"></i></span>
                                     </button>
                                 </td>
                             </tr>
