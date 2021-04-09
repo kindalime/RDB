@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cas_ng',
     'widget_tweaks',
+    'djrichtextfield',
 ]
 
 MIDDLEWARE = [
@@ -183,3 +184,27 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = get_secret('EMAIL')
 EMAIL_HOST_PASSWORD = get_secret('PASSWORD')
+
+DJRICHTEXTFIELD_CONFIG = {
+    'js': ['https://cdn.tiny.cloud/1/ocb5yqu86omcwtvbuec7oucoszmu6b3019cxgabkm60jba8h/tinymce/5/tinymce.min.js'],
+    'init_template': 'djrichtextfield/init/tinymce.js',
+    'settings': {
+        'toolbar': [
+            {'items': ['Format', '-', 'Bold', 'Italic', '-',
+                    'RemoveFormat']},
+            {'items': ['Link', 'Unlink', 'Image', 'Table']},
+            {'items': ['Source']}
+        ],
+        'format_tags': 'p;h1;h2;h3'
+    },
+    'profiles': {
+        'basic': {
+            'toolbar': 'bold italic | removeformat'
+        },
+        'advanced': {
+            'plugins': 'link image table code wordcount',
+            'toolbar': 'formatselect | bold italic | removeformat |'
+                    ' link unlink image table | code | wordcount'
+        }
+    }
+}

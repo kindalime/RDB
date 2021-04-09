@@ -12,10 +12,9 @@ from .models import Lab
 from habanero import cn
 from rdb.settings import DEBUG
 
-
 def index(request):
     labs = Lab.objects.all()
-    return render(request, "construction.html", {'labs': len(labs) + 50})
+    return render(request, "index.html", {'labs': labs, 'labs_length': len(labs)})
 
 def about(request):
     return render(request, "about.html")
@@ -28,7 +27,7 @@ def search(request):
     if not query:
         return HttpResponseRedirect("/")
     labs = Lab.objects.search(query)
-    return render(request, "construction.html", {'labs': len(labs) + 50})
+    return render(request, "search.html", {'labs': len(labs) + 50})
 
 def random(request):
     return HttpResponseRedirect(Lab.objects.order_by('?').first().get_absolute_url())
@@ -144,7 +143,7 @@ class LabUpdate(LoginRequiredMixin, UpdateView):
         self.object = self.get_object()
         
         edit = request.POST.get("netID").split(',')
-        if request.user.username not in edit:
+        if request.user.username not in edit and not request.user.is_superuser:
             edit.append(request.user.username)
         edit = list(set(list(filter(None, edit))))
 
@@ -156,7 +155,7 @@ class LabUpdate(LoginRequiredMixin, UpdateView):
         return super().post(request, *args, **kwargs)
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.username not in self.get_object().edit and request.user.username != "ske8":
+        if request.user.username not in self.get_object().edit and not request.user.is_superuser:
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
     

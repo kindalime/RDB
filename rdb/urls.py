@@ -13,13 +13,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from app import views
-import django_cas_ng.views
 from django.views.generic.base import RedirectView
+import django_cas_ng.views
+import djrichtextfield
 
 
 favicon_view = RedirectView.as_view(url='/static/favicon.ico', permanent=True)
@@ -42,6 +43,7 @@ urlpatterns += [
     path('lab/<slug:slug>/', views.LabDetail.as_view(), name='lab-detail'),
     path('lab/<slug:slug>/update/', views.LabUpdate.as_view(), name='lab-update'),
     path('lab/<slug:slug>/delete/', views.LabDelete.as_view(), name='lab-delete'),
+    path('djrichtextfield/', include('djrichtextfield.urls')),
     re_path(r'^favicon\.ico$', favicon_view),
 ]
 

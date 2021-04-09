@@ -17,31 +17,31 @@
         <div class="d-flex justify-content-between row-to-col flex-wrap">
             <div class="body3 m-3" style="margin-top: 0 !important; margin-bottom: 0 !important;">
                 <div class = "mt-3">
-                    <p>Principal Investigator: {{ lab.pi_name }}</p>
+                    <h5 class="h5-bold">Principal Investigator:</h5> <p>{{ lab.pi_name }}</p>
                 </div>
                 <div class = "mt-3">
-                    <p>Department: {{ lab.department }}</p>
+                    <h5 class="h5-bold">Department:</h5> <p>{{ lab.department }}</p>
                 </div>
                 <div class = "mt-3">
-                    <p>Contact: {{ lab.email }}</p>
+                    <h5 class="h5-bold">Contact:</h5> <p>{{ lab.email }}</p>
                 </div>
                 {% if lab.website %}
                 <div class = "mt-3">
-                    <p>Website: <a class="lab-website" href="{{lab.website}}" style="color:#0645AD ">{{ lab.website }}</a></p>
+                    <h5 class="h5-bold">Website:</h5> <p><a class="lab-website" href="{{lab.website}}" style="color:#0645AD ">{{ lab.website }}</a></p>
                 </div>
                 {% endif %}
             </div>
 
-            <div class="body m-3 flex-grow-1" style="margin-bottom: 0 !important; margin-top: 0 !important;">
+            <div class="body m-3 flex-grow-1" style="margin-top: 0 !important; margin-bottom: 0 !important; overflow: hidden !important;">
                 <div class="body3 mb-3">
-                    Lab Description: {{ lab.project_desc }}
+                    <h5  class="h5-bold" style="margin-top: 0 !important;">Lab Description:</h5> {{ lab.project_desc | safe }}
                 </div>
                 <div class="body3 mb-3">
-                    Last Updated: {{ lab.modified_date|timesince }} ago
+                    <h5 class="h5-bold">Last Updated:</h5> <p>{{ lab.modified_date | timesince }} ago</p>
                 </div>
                 {% if lab.publications %}
                 <div class="body3 mb-3">
-                    Recent Publications:
+                    <h5 class="h5-bold">Recent Publications:</h5>
                     <ol>
                         {% for publication in lab.publications %}
                             <li>{{ publication }}</li>

@@ -16,6 +16,32 @@
     padding: 10px 30px;
 
 }
+
+.tox-statusbar__branding, .tox-notifications-container {
+  display: none;
+}
+
+.tox-tinymce { 
+  border-color: rgb(118, 118, 118) !important;
+  border-radius: 2.5px !important;
+}
+
+.tox-toolbar__primary, .tox-statusbar, .tox-toolbar__primary, .tox-toolbar-overlord {
+  border-top-color: rgb(118, 118, 118) !important;
+}
+
+.tox-toolbar__group {
+  border-right-color: rgb(118, 118, 118) !important;
+}
+
+.h5-bold {
+  font-weight: bold;
+}
+
+.tox .tox-toolbar__primary {
+  background: url("data:image/svg+xml;charset=utf8,%3Csvg height='39px' viewBox='0 0 40 39px' width='40' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='38px' width='100' height='1' fill='%23767676'/%3E%3C/svg%3E") left 0 top 0 #fff !important;
+}
+
 .center-padding{
     overflow-x: auto;
     text-align: center;
@@ -456,5 +482,14 @@ table.dataTable.no-footer {
   }
   tr {
     font-size: .8rem;
+  }
+}
+
+.jumbotron {
+  border-radius: 2.5px !important;
+}
+@media (min-width: 576px) {
+  .jumbotron {
+    padding: 2rem 2rem !important;
   }
 }

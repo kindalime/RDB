@@ -4,12 +4,15 @@
 {% block title %}Lab Form{% endblock %} 
 
 {% block content %}
+<head>
+	{{ form.media }}
+</head>
 <body class="w3-animate-opacity top-padding">
 	<form id="lab-form" method="POST" enctype="multipart/form-data" autocomplete="off">
 		{% csrf_token %}
 		<div class="mid-padding left d-flex flex-column">
 			<div class="mt-3 header2 d-flex row-to-col flex-row flex-wrap">
-				<p>Lab/Research Group Name*:</p>
+				<p>Lab/Research Project Name*:</p>
 				{{ form.name | add_class:"w-100 lab_name" }}
 				{{ form.name.errors }}
 			</div>
@@ -35,7 +38,7 @@
 						<p>Department*:
 							{{ form.department | add_class:"resizeselect" }}
 							{{ form.department.errors }}
-							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Which department is the lab in?" aria-hidden="true"></i>
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Which department is the lab/research project in?" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
@@ -49,7 +52,7 @@
 						<p>Website:
 							{{ form.website | add_class:"lab_website" }}
 							{{ form.website.errors }}
-							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="What is the lab's website? (not required)" aria-hidden="true"></i>
+							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="What is the lab/research project's website? (not required)" aria-hidden="true"></i>
 						</p>
 					</div>
 					<div class="mt-3">
@@ -89,7 +92,7 @@
 					</div>
 					<div class="mt-3">
 						<p> On-Campus:
-							{{ form.work_in_person | add_class:"lab_on_campus" }}
+							{{ form.work_in_person | add_class:"lab_on_campus" | safe }}
 							{{ form.work_in_person.errors }}
 							<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Does the lab have on-campus that students can work on in person?" aria-hidden="true"></i>
 						</p>
@@ -97,7 +100,7 @@
 				</div>
 				<div></div>
 				<div class="desc-pub body m-3 flex-grow-1" style="margin-bottom: 0px !important;">
-					<p class="form-title">Lab/Research Group Description and Project Summaries*:
+					<p class="form-title">Lab/Research Project Description*:
 						<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="What is the main function of the lab/research group, what will students be doing, etc?" aria-hidden="true"></i>
 					</p>
 					<div>
@@ -110,7 +113,6 @@
 						{% else %}
 							<span class="align-left"></span>
 						{% endif %}
-						<span class="align-right"><span id="display_count">0</span>/1000 words</span>
 					</div>
 					<div class="align-right sbody3"></div>
 					<p class="mt-3 form-title">Recent Publications:
@@ -184,9 +186,9 @@
 				$(".lab_website").val(localStorage.getItem('lab_website'));
 			}
 
-			if (!saveInfo && localStorage.getItem('lab_desc')) {
-				$(".lab_desc").val(localStorage.getItem('lab_desc'));
-			}
+			// if (!saveInfo && localStorage.getItem('lab_desc')) {
+			// 	$(".lab_desc").val(localStorage.getItem('lab_desc'));
+			// }
 
 			loadCheckbox('lab_mentors', saveInfo);
 			loadCheckbox('lab_funded', saveInfo);
@@ -223,7 +225,7 @@
 						localStorage.setItem('lab_netid', $('.lab_netid').val());
 						localStorage.setItem('lab_email', $('.lab_email').val());
 						localStorage.setItem('lab_website', $('.lab_website').val());
-						localStorage.setItem('lab_desc', $('.lab_desc').val());
+						// localStorage.setItem('lab_desc', $('.lab_desc').val());
 						saveCheckbox('lab_mentors', saveInfo);
 						saveCheckbox('lab_funded', saveInfo);
 						saveCheckbox('lab_undergrads', saveInfo);
@@ -290,6 +292,8 @@
 					event.target.closest('li').remove()
 				}
 			});
+
+			$("textarea").removeAttr("required");
 
 			$('.bootstrap-tagsinput').on('keyup keypress', function(e) {
 				var keyCode = e.keyCode || e.which;
