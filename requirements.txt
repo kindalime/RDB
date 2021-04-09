@@ -2,6 +2,7 @@ Django
 whitenoise
 django-cas-ng
 django-widget-tweaks
+django-richtextfield
 psycopg2
 gunicorn
 habanero
