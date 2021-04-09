@@ -87,7 +87,7 @@
 .task-title {
   overflow-x: auto;
   outline: none;
-  cursor: default;
+  cursor: auto;
 }
 
 /* "float-container" and "float-child" fix buttons on index*/
