@@ -27,7 +27,7 @@ def search(request):
     if not query:
         return HttpResponseRedirect("/")
     labs = Lab.objects.search(query)
-    return render(request, "search.html", {'labs': len(labs) + 50})
+    return render(request, "search.html", {'labs': len(labs)})
 
 def random(request):
     return HttpResponseRedirect(Lab.objects.order_by('?').first().get_absolute_url())
