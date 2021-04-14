@@ -5,9 +5,10 @@
 {% block content %}
 <head>
     <link href="/static/construction.css" rel="stylesheet">
+    <!-- <link href="/static/filter.css" rel="stylesheet"> -->
 </head>
 
-{% if request.user.is_staff or request.user.is_superuser %}
+{% if request.user.is_staff %}
     <div class="jumbotron text-center">
         <h1 class="display-4">Yale Research Database</h1>
         {% if labs %}
@@ -21,9 +22,9 @@
         </p>
     </div>
 {% elif request.user.is_authenticated %}
-    <!-- <div class="container student-table">
+    <div class="container student-table">
         <div class="row">
-            <div class="col-lg-12 col-md-12 item">
+            <div class="table-responsive col-lg-12 col-md-12 item">
                 <table id="labs" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -31,6 +32,12 @@
                             <th>Principal Investigator</th>
                             <th>Department</th>
                             <th>Description</th>
+                            <th>Funded</th>
+                            <th>Remote</th>
+                            <th>On Campus</th>
+                            <th>Undergraduates</th>
+                            <th>Graduates</th>
+                            <th>Mentors</th>
                             <th>View</th>
                         </tr>
                     </thead>
@@ -40,9 +47,15 @@
                                 <td>{{lab.name}}</td>
                                 <td>{{lab.pi_name}}</td>
                                 <td>{{lab.department}}</td>
-                                <td class="project_desc_td">{{lab.project_desc| safe |truncatechars:40}}}</td>
+                                <td class="project_desc_td">{{lab.project_desc}}}</td>
+                                <td>{{lab.funded}}</td>
+                                <td>{{lab.work_remote}}</td>
+                                <td>{{lab.work_in_person}}</td>
+                                <td>{{lab.accept_undergrads}}</td>
+                                <td>{{lab.accept_grads}}</td>
+                                <td>{{lab.mentors}}</td>
                                 <td style="text-align: center;">
-                                    <button data-href="{% url 'lab-detail' lab.slug %}" type="button" class="btn btn-git btn-xs dt-edit click">
+                                    <button data-href="{% url 'lab-detail' lab.slug %}" type="button" class="btn btn-primary btn-xs dt-edit click">
                                         <i class="fas fa-eye"></i></span>
                                     </button>
                                 </td>
@@ -52,8 +65,8 @@
                 </table>
             </div>
         </div>
-    </div> -->
-    <div class="jumbotron text-center">
+    </div>
+    <!-- <div class="jumbotron text-center">
       <h1 class="display-4">Yale Research Database</h1>
       {% if labs %}
           <p class="lead"><span class="font-weight-bold text-warning">{{labs_length}}</span> Yale Labs and Research Projects are currently hosted on RDB</p>
@@ -61,7 +74,7 @@
       <hr class="my-4">
       <p class="lead">We're not quite ready for students yet! Check back soon for more updates.</p>
       <p class="lead">Wrong? We can help, contact us at yura@yale.edu.</p>
-  </div>
+    </div> -->
 {% else %}
     <div class="jumbotron text-center">
         <h1 class="display-4">Yale Research Database</h1>
@@ -77,17 +90,32 @@
 
 <script>
    $(document).ready(function() {
-      $('#labs').DataTable({
-         rowReorder: {
-               selector: 'td:nth-child(2)'
-         },
-         responsive: true,
-      });
-   });
+        $('#labs').DataTable({
+            dom: 'Plfrtip',
+            // searchPane: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            columnDefs:[
+                {
+                    searchPanes:{
+                        show: true,
+                    },
+                    targets: [2, 4, 5, 6, 7, 8],
+                },
+                {
+                    "targets": [3, 4, 5, 6, 7, 8, 9],
+                    "visible": false
+                }
+            ],
+            select: true,
+            responsive: true,
+        });
 
-   $(document).on('click', '.click', function(){
-      window.location = $(this).data('href');
-      return false;
+        $(document).on('click', '.click', function(){
+            window.location = $(this).data('href');
+            return false;
+        });
    });
 </script>
 {% endblock %}

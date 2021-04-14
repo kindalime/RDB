@@ -90,6 +90,10 @@
   cursor: auto;
 }
 
+.dataTables_scrollBody {
+  height: auto !important;
+}
+
 /* "float-container" and "float-child" fix buttons on index*/
 .float-container {
     border: 3px solid #fff;
