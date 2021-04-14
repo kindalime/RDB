@@ -17,6 +17,8 @@
 
 }
 
+
+
 .tox-statusbar__branding, .tox-notifications-container {
   display: none;
 }
@@ -440,6 +442,20 @@ tbody tr:hover {
   border: 1px solid #dee2e6 !important;
   box-shadow: none !important;
 }
+
+div.dtsp-panesContainer div.dtsp-searchPanes div.dtsp-searchPane {
+  flex-basis: auto !important;
+}
+
+div.dtsp-panesContainer {
+  margin: 0 !important;
+  border: 1px solid #dee2e6;
+  margin-bottom: 0.5em !important;
+}
+
+/* .dtsp-subRow2 {
+  display: none !important;
+} */
 
 td {
   line-height: 100% !important;
