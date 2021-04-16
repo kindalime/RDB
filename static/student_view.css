@@ -1,0 +1,242 @@
+main {
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+}
+
+.dtsp-verticalContainer {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+div.dataTables_wrapper div.dataTables_info {
+    padding-top: 1.5rem !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dtr-details {
+    width: 100%;
+}
+
+.dtsp-panesContainer {
+    background-color: white;
+}
+
+.dtsp-searchInputBox {
+    background-color: white;
+}
+
+div.dtsp-verticalContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+div.dtsp-verticalContainer div.dtsp-verticalPanes,
+div.dtsp-verticalContainer div.container {
+    width: 100%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 0;
+}
+
+div.dtsp-verticalContainer div.dtsp-verticalPanes {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 25% !important;
+}
+
+div.dtsp-verticalPanes {
+    padding-left: 1.5rem;
+}
+
+.container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.dtsp-clearAll {
+    width: 100%;
+    margin: 10px !important;
+    margin-left: 5px !important;
+    padding: 5px !important;
+    background-color: #F93154 !important;
+    border-radius: 6px !important;
+}
+
+.dtsp-clearAll:hover {
+    background-color: #dc062b !important;
+    cursor: pointer;
+    border-radius: 6px !important;
+}
+
+.dtsp-title {
+    width: 100%;
+    margin: 10px !important;
+    margin-right: 5px !important;
+    padding: 5px !important;
+    background-color: rgba(0,0,0,.05) !important;
+    border-radius: 6px
+}
+
+input.dtsp-search {
+    min-width: 0px !important;
+    margin: 0px !important;
+    cursor: text !important
+}
+
+div.dtsp-verticalContainer div.dtsp-verticalPanes div.dtsp-searchPanes {
+    flex-direction: column;
+    flex-basis: 0px;
+}
+
+div.dtsp-verticalContainer div.dtsp-verticalPanes div.dtsp-searchPanes div.dtsp-searchPane {
+    flex-basis: 0px;
+}
+
+div.dtsp-verticalContainer div.container {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 75%;
+}
+
+div.dtsp-panesContainer {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 5px;
+    margin: 0 !important;
+}
+
+/* Added by RDB Team */
+
+.dtsp-paneInputButton {
+    padding-left: 5px !important;
+}
+
+.dataTables_scrollBody {
+    height: auto !important;
+}
+
+.dtsp-subRow1 {
+    width: 100%;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    padding-bottom: 2px !important;
+}
+
+.dtsp-subRow2 {
+    padding-right: 5px !important;
+    padding-bottom: 2px !important;
+}
+
+.dtsp-panesContainer {
+    border: 1px solid rgba(34,36,38,.15) !important;
+}
+
+.search {
+    margin-top: 7.5px !important;
+    margin-right: 15px !important;
+}
+
+.dtsp-searchInputBox {
+    padding: 15px !important;
+    padding-bottom: 0px !important;
+    /* width: 100% !important; */
+    border: 1px solid rgba(34,36,38,.15) !important;
+    border-bottom: 0px solid rgba(34,36,38,.15) !important;
+    border-top-left-radius: 6px !important;
+    border-top-right-radius: 6px !important;
+}
+
+.dtsp-panesContainer {
+    border-top: 0px solid !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+input {
+    box-sizing: border-box;
+    padding: 5px !important;
+}
+
+.icon-rdb {
+    margin-top: 0px !important;
+    margin-right: 0px !important;
+}
+
+.dtsp-paneButton {
+    border-radius: 6px;
+    padding: 0px 5px !important;
+    margin: 0 !important;
+}
+
+.dataTables_filter {
+    display: none !important;
+}
+
+.dtsp-paneButton:hover {
+    background-color: rgba(0,0,0,.05) !important;
+}
+
+.dtsp-searchButtonCont {
+    display: none !important;
+}
+
+.dtsp-pill {
+    background-color: #f9fafb !important;
+}
+
+.dataTable {
+    border-spacing: 0 !important;
+}
+
+/* #example_paginate {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+} */
+
+@media (max-width: 576px) {
+    div.dtsp-verticalPanes {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .dtsp-verticalContainer {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    div.dataTables_wrapper div.dataTables_info {
+        padding-top: 1rem !important;
+    }
+
+    /* #example_paginate {
+        flex-direction: column;
+    } */
+}
+
+.dtsp-titleRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Remove placeholder on click */
+input:focus::-webkit-input-placeholder { color:transparent !important; }
+input:focus:-moz-placeholder { color:transparent !important; } /* Firefox 18- */
+input:focus::-moz-placeholder { color:transparent !important; } /* Firefox 19+ */
+input:focus:-ms-input-placeholder { color:transparent !important; } /* oldIE ;) */

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/dataTables.semanticui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+
+        <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap.min.js"></script>
+
+
+        <!-- filters -->
+        <script src="https://cdn.datatables.net/searchpanes/1.2.1/js/dataTables.searchPanes.min.js"></script>
+        <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
+        
+        <link rel="stylesheet" href="/static/student_view.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap.min.css">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.semanticui.min.css">
+
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/1.2.1/css/searchPanes.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css">
+    </head>
+    <body>
+        <div class="dtsp-verticalContainer">
+            <div class="dtsp-verticalPanes">
+                <div class="dtsp-searchInputBox ui fluid icon input">
+                    <input id="labs-filter" type="text" placeholder="Search for a lab...">
+                    <i class="search icon"></i>
+                </div>
+            </div>
+            <div class="container">
+                <table id="example" class="ui celled table unstackable" width="100%">
+                </table>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready( function () {
+            var data = []
+
+            var table = $('#example').DataTable({
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    ajax: {
+                        url: '/labs/json',
+                        data: 'data'
+                    },
+                    "columns": [
+                        { title: "Name", "data": "name" },
+                        { title: "Principal Investigator", "data": "pi_name" },
+                        { title: "Department", "data": "department" },
+                        { title: "Remote", "data": "work_remote" },
+                        { title: "On-Campus", "data": "work_in_person" },
+                        { title: "Undergraduates", "data": "accept_undergrads" },
+                        { title: "Graduates", "data": "accept_grads" },
+                        { title: "Email", "data": "email" },
+                        { title: "Website", "data": "website" },
+                        { title: "Mentors", "data": "mentors" },
+                        { title: "Funded", "data": "funded" },
+                        { title: "Description", "data": "project_desc" },
+                        { title: "Created", "data": "created_date" },
+                        { title: "Last Modified", "data": "modified_date" },
+                        { title: "View", "data": "slug"
+                        ,
+                        "render": function (data, type, row, meta) {
+                            console.log(data);
+                            return '<button data-href="{% url "lab-detail" "yan-biofilm-lab-1" %}" type="button" class="btn btn-primary btn-xs dt-edit click">'+
+                                      '<i class="fas fa-eye"></i></span>'+
+                                    '</button>'
+                            }
+                        }
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": [3,4,5,6,7,8,9,10,11,12,13],
+                            "visible": false,
+                        }
+                    ],
+                    "paging": false,
+                    deferRender: true,
+                    searching: true,
+                    searchPanes: {
+                        layout: 'columns-1',
+                        columns: [2],
+                        dtOpts: {
+                            select:{
+                                style: 'multi'
+                            },
+                        },
+                        panes: [
+                            {
+                                header: 'Location',
+                                    options: [
+                                        {
+                                            label: 'Remote',
+                                                value: function(rowData, rowIdx) {
+                                                    return rowData.work_remote == true;
+                                            },
+                                            className: 'remote'
+                                        },
+                                        {
+                                            label: 'On-Campus',
+                                                value: function(rowData, rowIdx) {
+                                                    return rowData.work_in_person == true;
+                                            },
+                                            className: 'on-campus'
+                                        }
+                                    ],
+                                    dtOpts: {
+                                        searching: false,
+                                        order: [[1, 'desc']]
+                                    }
+                            },
+                            {
+                                header: 'Accepting',
+                                    options: [
+                                        {
+                                            label: 'Undergraduates',
+                                                value: function(rowData, rowIdx) {
+                                                    return rowData.accept_undergrads == true;
+                                            },
+                                            className: 'undergraduates'
+                                        },
+                                        {
+                                            label: 'Graduates',
+                                                value: function(rowData, rowIdx) {
+                                                    return rowData.accept_grads == true;
+                                            },
+                                            className: 'graduates'
+                                        }
+                                    ],
+                                    dtOpts: {
+                                        searching: false,
+                                        order: [[1, 'desc']]
+                                    }
+                            },
+                            {
+                                header: 'Resources',
+                                    options: [
+                                        {
+                                            label: 'Mentors',
+                                                value: function(rowData, rowIdx) {
+                                                    return rowData.mentors == true;
+                                            },
+                                            className: 'mentors'
+                                        },
+                                        {
+                                            label: 'Funded',
+                                                value: function(rowData, rowIdx) {
+                                                    return rowData.funded == true;
+                                            },
+                                            className: 'funded'
+                                        }
+                                    ],
+                                    dtOpts: {
+                                        searching: false,
+                                        order: [[1, 'desc']]
+                                    }
+                            }
+                        ]
+                    },
+                    language: {
+                        searchPanes: {
+                            title: {
+                                _: '%d Active Filters',
+                            }
+                        }
+                    },
+                    dom: '<"dtsp-dataTable"frtip>',
+                });
+                table.searchPanes()
+                $("div.dtsp-verticalPanes").append(table.searchPanes.container());
+
+                
+                $('#labs-filter').on( 'keyup', function () {
+                    table.search(this.value).draw();
+                });
+
+                // $(".dtsp-searchCont").addClass('ui fluid icon input');
+                // $('.dtsp-searchCont').append('<i class="search icon-rdb icon"></i>');
+            });
+        </script>
+    </body>
+</html>

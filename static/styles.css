@@ -458,7 +458,7 @@ div.dtsp-panesContainer {
 } */
 
 td {
-  line-height: 100% !important;
+  /* line-height: 100% !important; */
   vertical-align: middle !important;
 }
 

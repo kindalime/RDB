@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
@@ -11,6 +11,7 @@ from django.conf import settings
 from .models import Lab
 from habanero import cn
 from rdb.settings import DEBUG
+import json
 
 def index(request):
     labs = Lab.objects.all()
@@ -21,6 +22,23 @@ def about(request):
 
 def contact(request):
     return render(request, "contact.html")
+
+def search(request):
+    query = request.GET.get("q", None)
+    if not query:
+        return HttpResponseRedirect("/")
+    labs = Lab.objects.search(query)
+    return render(request, "search.html", {'labs': len(labs)})
+
+def labs_json(request):
+    hipaa_fields = [lab.name for lab in Lab._meta.get_fields()]
+    hipaa_fields.remove('id')
+    hipaa_fields.remove('pi_id')
+    hipaa_fields.remove('search_vector')
+    hipaa_fields.remove('edit')
+    hipaa_fields.remove('publications')
+    queryset = Lab.objects.all().values(*hipaa_fields)
+    return JsonResponse({"data": list(queryset)})
 
 def search(request):
     query = request.GET.get("q", None)
