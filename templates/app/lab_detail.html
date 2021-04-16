@@ -16,8 +16,8 @@
 
         <div class="d-flex justify-content-between row-to-col flex-wrap">
             <div class="body3 m-3" style="margin-top: 0 !important; margin-bottom: 0 !important;">
-                <div class = "mt-3">
-                    <h5 class="h5-bold">Principal Investigator:</h5> <p>{{ lab.pi_name }}</p>
+                <div>
+                    <h5 class="h5-bold" style="margin-top: 0 !important;">Principal Investigator:</h5> <p>{{ lab.pi_name }}</p>
                 </div>
                 <div class = "mt-3">
                     <h5 class="h5-bold">Department:</h5> <p>{{ lab.department }}</p>
@@ -91,7 +91,11 @@
         </div>
 
         <hr class="blue1" style = "width: 100%">
-        <p class="mb-3 header5 no-space">This view is currently under development. Soon you will have the ability to upload photos, create application forms, and so much more.</p>
+        {% if request.user.is_staff %}
+            <p class="mb-3 header5 no-space">This view is currently under development. Soon you will have the ability to upload photos, create application forms, and so much more.</p>
+        {% else %}
+            <p class="mb-3 header5 no-space">This view is currently under development. Soon you will have the ability to view photos, submit application forms, and so much more.</p>
+        {% endif %}
     </div>
 
     <script>

@@ -513,3 +513,9 @@ table.dataTable.no-footer {
     padding: 2rem 2rem !important;
   }
 }
+
+@media (max-width: 576px) {
+  .h5-lab-desc {
+    margin-top: 0 !important;
+  }
+}

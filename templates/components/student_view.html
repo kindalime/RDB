@@ -78,22 +78,18 @@
                         { title: "Description", "data": "project_desc" },
                         { title: "Created", "data": "created_date" },
                         { title: "Last Modified", "data": "modified_date" },
-                        { title: "View", "data": "slug"
-                        ,
-                        "render": function (data, type, row, meta) {
-                            console.log(data);
-                            return '<button data-href="{% url "lab-detail" "yan-biofilm-lab-1" %}" type="button" class="btn btn-primary btn-xs dt-edit click">'+
-                                      '<i class="fas fa-eye"></i></span>'+
-                                    '</button>'
+                        { title: "View", "data": "slug",
+                            "render": function (data, type, row, meta) {
+                                return `<button data-href="/lab/${data}" type="button" class="btn btn-primary btn-xs dt-edit click">`+'<i class="fas fa-eye"></i></span>'+'</button>'
                             }
                         }
                     ],
-                    // "columnDefs": [
-                    //     {
-                    //         "targets": [3,4,5,6,7,8,9,10,11,12,13],
-                    //         "visible": false,
-                    //     }
-                    // ],
+                    "columnDefs": [
+                        {
+                            "targets": [3,4,5,6,7,8,9,10,11,12,13],
+                            "visible": false,
+                        }
+                    ],
                     "paging": false,
                     deferRender: true,
                     searching: true,
