@@ -5,11 +5,8 @@
 {% block content %}
 <head>
     <link href="/static/construction.css" rel="stylesheet">
-    <!-- <link href="/static/filter.css" rel="stylesheet"> -->
 </head>
-{% if request.user.is_superuser %}
-    {% include 'components/student_view.html'%}
-{% elif request.user.is_staff %}
+{% if request.user.is_staff %}
     <div class="jumbotron text-center">
         <h1 class="display-4">Yale Research Database</h1>
         {% if labs %}
@@ -17,10 +14,8 @@
         {% endif %}
         <hr class="my-4">
         <p class="lead">To add/edit your listing on RDB, please click the buttons below.</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="/lab/create" role="button">Add Lab</a>
-            <a class="btn btn-primary btn-lg" href="/profile" role="button">Edit Lab</a>
-        </p>
+        <a class="btn btn-primary btn-lg" href="/lab/create" role="button">Add Lab</a>
+        <a class="btn btn-primary btn-lg" href="/profile" role="button">Edit Lab</a>
     </div>
 {% elif request.user.is_authenticated %}
     <div class="jumbotron text-center">
@@ -29,8 +24,8 @@
                 <p class="lead"><span class="font-weight-bold text-warning">{{labs_length}}</span> Yale Labs and Research Projects are currently hosted on RDB</p>
             {% endif %}
         <hr class="my-4">
-        <p class="lead">We're not quite ready for students yet! Check back soon for more updates.</p>
-        <p class="lead">Wrong? We can help, contact us at yura@yale.edu.</p>
+        <p class="lead">RDB is currently in beta development, please reach out if you encounter any issues!</p>
+        <a class="btn btn-primary btn-lg" href="/dashboard" role="button">Dashboard</a>
     </div>
 {% else %}
     <div class="jumbotron text-center">
@@ -39,40 +34,7 @@
             <p class="lead"><span class="font-weight-bold text-warning">{{labs_length}}</span> Yale Labs and Research Projects are currently hosted on RDB</p>
         {% endif %}
         <hr class="my-4">
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="/accounts/login" role="button">Login with CAS</a>
-        </p>
+        <a class="btn btn-primary btn-lg" href="/accounts/login" role="button">Login with CAS</a>
     </div>
 {% endif %}
-
-<script>
-   $(document).ready(function() {
-        $('#labs').DataTable({
-            dom: 'Plfrtip',
-            // searchPane: true,
-            rowReorder: {
-                selector: 'td:nth-child(2)'
-            },
-            columnDefs:[
-                {
-                    searchPanes:{
-                        show: true,
-                    },
-                    targets: [2, 4, 5, 6, 7, 8],
-                },
-                {
-                    "targets": [3, 4, 5, 6, 7, 8, 9],
-                    "visible": false
-                }
-            ],
-            select: true,
-            responsive: true,
-        });
-
-        $(document).on('click', '.click', function(){
-            window.location = $(this).data('href');
-            return false;
-        });
-   });
-</script>
 {% endblock %}

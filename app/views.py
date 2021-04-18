@@ -23,6 +23,10 @@ def about(request):
 def contact(request):
     return render(request, "contact.html")
 
+def dashboard(request):
+    labs = Lab.objects.all()
+    return render(request, "student_view.html", {'labs': labs, 'labs_length': len(labs)})
+
 def search(request):
     query = request.GET.get("q", None)
     if not query:

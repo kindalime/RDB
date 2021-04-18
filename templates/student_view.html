@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -47,6 +52,7 @@
                 </table>
             </div>
         </div>
+        <button type="button" id="BackTop" class="toTop-arrow" style="z-index: 100;"><i class="fa fa-arrow-up" style="font-size:24px; color: white;"></i></button>
 
         <script>
             $(document).ready( function () {
@@ -185,6 +191,11 @@
                 table.searchPanes()
                 $("div.dtsp-verticalPanes").append(table.searchPanes.container());
 
+                // $(".dtsp-panesContainer").append('<div class="dtsp-searchInputBox ui fluid icon input">\
+                //                                 <input id="labs-filter" type="text" placeholder="Search for a lab...">\
+                //                                 <i class="search icon"></i>\
+                //                                 </div>');
+
                 
                 $('#labs-filter').on( 'keyup', function () {
                     table.search(this.value).draw();
@@ -192,7 +203,20 @@
 
                 // $(".dtsp-searchCont").addClass('ui fluid icon input');
                 // $('.dtsp-searchCont').append('<i class="search icon-rdb icon"></i>');
+
+                $('#BackTop').click(function () {
+                    $('html,body').animate({scrollTop: 0}, 500);
+                });
+                
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 300) {
+                        $('#BackTop').fadeIn(300);
+                    } else {
+                        $('#BackTop').stop().fadeOut(300);
+                    }
+                }).scroll();
             });
         </script>
     </body>
 </html>
+{% endblock %}

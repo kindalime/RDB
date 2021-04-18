@@ -34,6 +34,7 @@ urlpatterns = [
     path('staff/', login_required(views.staff), name='staff'),
     path('random/', login_required(views.random), name='random'),
     path('profile/', login_required(views.profile), name='profile'),
+    path('dashboard/', login_required(views.dashboard), name='dashboard'),
     path('admin/', admin.site.urls),
     path('accounts/login/', django_cas_ng.views.LoginView.as_view(), name='cas_ng_login'),
     path('accounts/logout/', django_cas_ng.views.LogoutView.as_view(), name='cas_ng_logout'),

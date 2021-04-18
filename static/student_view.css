@@ -1,3 +1,9 @@
+body {
+    font-family: Verdana,sans-serif !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+}
+
 main {
     background-image: none;
     background-repeat: no-repeat;
@@ -5,10 +11,10 @@ main {
     background-size: cover;
 }
 
-.dtsp-verticalContainer {
+/* .dtsp-verticalContainer {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
-}
+} */
 
 div.dataTables_wrapper div.dataTables_info {
     padding-top: 1.5rem !important;
@@ -54,11 +60,14 @@ div.dtsp-verticalContainer div.dtsp-verticalPanes {
 
 div.dtsp-verticalPanes {
     padding-left: 1.5rem;
+    padding-top: 1.5rem;
 }
 
 .container {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
 }
 
 /* .dtsp-searchInputBox {
@@ -115,7 +124,9 @@ div.dtsp-verticalContainer div.dtsp-verticalPanes div.dtsp-searchPanes div.dtsp-
 div.dtsp-verticalContainer div.container {
     flex-grow: 1;
     flex-shrink: 0;
-    flex-basis: 75%;
+    flex-basis: 75% !important;
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
 div.dtsp-panesContainer {
@@ -235,15 +246,12 @@ input {
     div.dtsp-verticalPanes {
         padding-left: 1rem;
         padding-right: 1rem;
-        padding-bottom: 1rem;
+        padding-top: 1rem;
     }
 
     .container {
         padding-left: 1rem;
         padding-right: 1rem;
-    }
-
-    .dtsp-verticalContainer {
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
@@ -269,3 +277,23 @@ input:focus::-webkit-input-placeholder { color:transparent !important; }
 input:focus:-moz-placeholder { color:transparent !important; } /* Firefox 18- */
 input:focus::-moz-placeholder { color:transparent !important; } /* Firefox 19+ */
 input:focus:-ms-input-placeholder { color:transparent !important; } /* oldIE ;) */
+
+.toTop-arrow {
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 50%;
+    background: black;
+    opacity: 0.75;
+    cursor: pointer;
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    display: none;
+}
+
+.toTop-arrow:focus {
+    outline: none;
+}

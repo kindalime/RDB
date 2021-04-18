@@ -13,6 +13,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                    {% if request.user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lab/create">Add Lab</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About</a>
                 </li>
@@ -20,12 +33,6 @@
                     <a class="nav-link" href="/contact">Contact</a>
                 </li>
                 {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/lab/create">Add Lab</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/accounts/logout">Logout</a>
                 </li>
