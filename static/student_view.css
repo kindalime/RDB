@@ -289,7 +289,7 @@ input:focus:-ms-input-placeholder { color:transparent !important; } /* oldIE ;) 
     opacity: 0.75;
     cursor: pointer;
     position: fixed;
-    right: 1rem;
+    left: 1rem;
     bottom: 1rem;
     display: none;
 }

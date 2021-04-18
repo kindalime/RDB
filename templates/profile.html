@@ -58,7 +58,11 @@
                         <tr>
                             <th scope = "col">Lab name</th>
                             <th scope = "col">Principal Investigator</th>
-                            <th scope = "col">Edit/Delete</th>
+                            {% if user.is_staff %}
+                                <th scope = "col">Edit/Delete</th>
+                            {% else %}
+                                <th scope = "col">View</th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>
@@ -144,6 +148,9 @@
                 selector: 'td:nth-child(2)'
             },
             responsive: true,
+            "paging": false,
+            searching: false,
+            "bInfo" : false
         });
 
         $('#all_labs').DataTable({

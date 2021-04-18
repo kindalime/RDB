@@ -201,6 +201,11 @@
                     table.search(this.value).draw();
                 });
 
+                $(document).on('click', '.click', function(){
+                    window.location = $(this).data('href');
+                    return false;
+                });
+
                 // $(".dtsp-searchCont").addClass('ui fluid icon input');
                 // $('.dtsp-searchCont').append('<i class="search icon-rdb icon"></i>');
 
