@@ -114,7 +114,7 @@
             {% endif %}
             
             {% if user.is_superuser %}
-                <h1 class="text-sm-left text-center">Add Faculty</h1>
+                <h1 class="text-sm-left text-center" style="margin-top: 1rem !important;">Add Faculty</h1>
                 <form action="/staff">
                     <div class="form-row align-items-center">
                         <div class="col-auto">
@@ -135,7 +135,7 @@
                     {% endif %}
                 </form>
 
-                <h1 class="text-sm-left text-center">All Labs</h1>
+                <h1 class="text-sm-left text-center" style="margin-top: 1rem !important;">All Labs</h1>
                 <div class = "responsive-table">
                     <table id="all_labs" class="table table-striped table-bordered mt-3" cellspacing="0" width="100%">
                         <thead>
@@ -188,8 +188,8 @@
                 selector: 'td:nth-child(2)'
             },
             responsive: true,
-            "paging": true,
-            searching: true,
+            "paging": false,
+            searching: false,
             "bInfo" : false,
             "language": {
                 "emptyTable": "No likes to show"
