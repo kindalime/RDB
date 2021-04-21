@@ -5,6 +5,7 @@ from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, HttpResponse
+from app.serializers import LabSerializer
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
@@ -34,6 +35,18 @@ def search(request):
     labs = Lab.objects.search(query)
     return render(request, "search.html", {'labs': len(labs)})
 
+def like(request):
+    user = User.objects.get(username=request.user)
+    if request.method == 'POST':
+        slug = request.POST['slug']
+        lab = get_object_or_404(Lab, slug=slug)
+        liked = user in lab.likes.all()
+        if liked:
+            lab.likes.remove(user)
+        else:
+            lab.likes.add(user)
+    return JsonResponse({'liked':liked, 'lab':lab.name})
+
 def labs_json(request):
     hipaa_fields = [lab.name for lab in Lab._meta.get_fields()]
     hipaa_fields.remove('id')
@@ -42,7 +55,11 @@ def labs_json(request):
     hipaa_fields.remove('edit')
     hipaa_fields.remove('publications')
     queryset = Lab.objects.all().values(*hipaa_fields)
-    return JsonResponse({"data": list(queryset)})
+    
+    serializer = LabSerializer(Lab.objects.all(), many=True)
+
+    # return JsonResponse({"data": list(queryset)})
+    return JsonResponse({"data": serializer.data})
 
 def search(request):
     query = request.GET.get("q", None)
@@ -83,8 +100,8 @@ def staff(request):
 def profile(request):
     user = User.objects.get(username=request.user)
     labs = Lab.objects.filter(edit__contains=[request.user])
+    liked_labs = Lab.objects.filter(likes__in=[request.user])
     all_labs = Lab.objects.all()
-    liked_labs = labs
     return render(request, "profile.html", {'user': user, 'labs': labs, 'all_labs': all_labs, 'liked_labs': liked_labs})
 
 def email(request):

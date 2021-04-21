@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'django_cas_ng',
     'widget_tweaks',
     'djrichtextfield',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

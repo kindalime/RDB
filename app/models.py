@@ -6,9 +6,8 @@ from django.contrib.postgres.fields import ArrayField
 from django.conf import settings 
 from .managers import LabManager
 from djrichtextfield.models import RichTextField
+from django.contrib.auth.models import User
 from django.utils.text import slugify
-
-User = settings.AUTH_USER_MODEL
 
 class Lab(models.Model):
     """A typical class defining a model, derived from the Model class."""
@@ -35,6 +34,7 @@ class Lab(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     slug = models.SlugField(blank=True, max_length=255)
+    likes = models.ManyToManyField(User, blank=True, related_name='likes')
 
     # Metadata
     class Meta:

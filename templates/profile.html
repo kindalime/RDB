@@ -47,45 +47,72 @@
             </div>
         </div>
         <div class="col-md-8">
-            {% if request.user.is_staff %}
+            {% if user.is_staff or labs %}
                 <h1 class="text-sm-left text-center mt-0">Active Labs</h1>
-            {% else %}
-                <h1 class="text-sm-left text-center mt-0">Liked Labs</h1>
-            {% endif %}
-            <div class = "table-responsive">
-                <table id="labs" class="table table-hover table-striped table-bordered text-center" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th scope = "col">Lab name</th>
-                            <th scope = "col">Principal Investigator</th>
-                            {% if user.is_staff %}
+                <div class = "table-responsive">
+                    <table id="labs" class="table table-hover table-striped table-bordered text-center" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th scope = "col">Lab name</th>
+                                <th scope = "col">Principal Investigator</th>
                                 <th scope = "col">Edit/Delete</th>
-                            {% else %}
-                                <th scope = "col">View</th>
-                            {% endif %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for lab in labs %}
-                            <tr class="click" data-href="{% url 'lab-detail' lab.slug %}">
-                                <td>{{lab.name}}</td>
-                                <td>{{lab.pi_name}}</td>
-                                <td style="text-align: center;">
-                                    <button data-href="{% url 'lab-update' lab.slug %}" type="button" class="btn btn-success btn-xs dt-edit click" style="margin-right:16px;">
-                                        <i class="fas fa-edit"></i></span>
-                                    </button>
-                                    <button data-href="{% url 'lab-detail' lab.slug %}" type="button" class="btn btn-primary btn-xs dt-delete click"  style="margin-right:16px;">
-                                        <i class="fas fa-eye"></i></span>
-                                    </button>
-                                    <button data-href="{% url 'lab-delete' lab.slug %}" type="button" class="btn btn-danger btn-xs dt-delete click">
-                                        <i class="fas fa-trash"></i></span>
-                                    </button>
-                                </td>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {% for lab in labs %}
+                                <tr class="click" data-href="{% url 'lab-detail' lab.slug %}">
+                                    <td>{{lab.name}}</td>
+                                    <td>{{lab.pi_name}}</td>
+                                    <td style="text-align: center;">
+                                        <button data-href="{% url 'lab-update' lab.slug %}" type="button" class="btn btn-success btn-xs dt-edit click" style="margin-right:16px;">
+                                            <i class="fas fa-edit"></i></span>
+                                        </button>
+                                        <button data-href="{% url 'lab-detail' lab.slug %}" type="button" class="btn btn-primary btn-xs dt-delete click"  style="margin-right:16px;">
+                                            <i class="fas fa-eye"></i></span>
+                                        </button>
+                                        <button data-href="{% url 'lab-delete' lab.slug %}" type="button" class="btn btn-danger btn-xs dt-delete click">
+                                            <i class="fas fa-trash"></i></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+            {% if user.is_authenticated and not user.is_staff or user.is_staff and liked_labs %}
+                {% if labs %}
+                    <h1 class="text-sm-left text-center mt-0" style="margin-top: 1rem !important;">Liked Labs</h1>
+                {% else %}
+                    <h1 class="text-sm-left text-center mt-0">Liked Labs</h1>
+                {% endif %}
+                <div class = "table-responsive">
+                    <table id="liked_labs" class="table table-hover table-striped table-bordered text-center" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th scope = "col">Lab name</th>
+                                <th scope = "col">Principal Investigator</th>
+                                <th scope = "col">View</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for lab in liked_labs %}
+                                <tr class="click" data-href="{% url 'lab-detail' lab.slug %}">
+                                    <td>{{lab.name}}</td>
+                                    <td>{{lab.pi_name}}</td>
+                                    <td style="text-align: center;">
+                                        <button data-href="{% url 'lab-detail' lab.slug %}" type="button" class="btn btn-primary btn-xs dt-delete click">
+                                            <i class="fas fa-eye"></i></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+            
             {% if user.is_superuser %}
                 <h1 class="text-sm-left text-center">Add Faculty</h1>
                 <form action="/staff">
@@ -150,7 +177,23 @@
             responsive: true,
             "paging": false,
             searching: false,
-            "bInfo" : false
+            "bInfo" : false,
+            "language": {
+                "emptyTable": "No listings to show"
+            }
+        });
+
+        $('#liked_labs').DataTable({
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            responsive: true,
+            "paging": false,
+            searching: false,
+            "bInfo" : false,
+            "language": {
+                "emptyTable": "No likes to show"
+            }
         });
 
         $('#all_labs').DataTable({

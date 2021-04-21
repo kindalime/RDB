@@ -40,6 +40,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css">
     </head>
     <body>
+        {% csrf_token %}
         <div class="dtsp-verticalContainer">
             <div class="dtsp-verticalPanes">
                 <div class="dtsp-searchInputBox ui fluid icon input">
@@ -70,7 +71,18 @@
                         data: 'data'
                     },
                     "columns": [
-                        { title: "Name", "data": "name" },
+                        // { title: "Name", "data": "name" },
+                        { title: "Name", "data": "name",
+                            "render": function (data, type, row, meta) {
+                                var likes = row.likes;
+                                var user = parseInt("{{ request.user.id }}");
+                                if (likes != null && likes.includes(user)) {
+                                    return `<i name='${row.slug}' class="fas fa-heart fa-2x like"></i></span>`+`${data}`
+                                } else {
+                                    return `<i name='${row.slug}' class="far fa-heart fa-2x like"></i></span>`+`${data}`
+                                }
+                            }
+                        },
                         { title: "Principal Investigator", "data": "pi_name" },
                         { title: "Department", "data": "department" },
                         { title: "Remote", "data": "work_remote" },
@@ -94,6 +106,10 @@
                         {
                             "targets": [3,4,5,6,7,8,9,10,11,12,13],
                             "visible": false,
+                        },
+                        {
+                            targets:-1,
+                            className:'last-column',
                         }
                     ],
                     "paging": false,
@@ -220,6 +236,33 @@
                         $('#BackTop').stop().fadeOut(300);
                     }
                 }).scroll();
+
+                $(document).on('click', '.like', function() {
+                    var lab_slug = $(this).attr('name');
+
+                    if ($(this).hasClass("far")) {
+                        $(this).removeClass("far").addClass('fas');
+                    } else {
+                        $(this).removeClass("fas").addClass('far');
+                    }
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{% url 'likes' %}",
+                        data: {
+                            'slug': lab_slug,
+                            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                        },
+                        success: likeCallback,
+                        dataType: 'html'
+                    });
+
+                    function likeCallback(data, jqXHR) {
+
+                    }
+                    
+                });
+
             });
         </script>
     </body>

@@ -30,7 +30,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
     path('search/', login_required(views.search), name='search'),
-    path('labs/json/', views.labs_json, name='labs_json'),
+    path('labs/json/', login_required(views.labs_json), name='labs_json'),
     path('staff/', login_required(views.staff), name='staff'),
     path('random/', login_required(views.random), name='random'),
     path('profile/', login_required(views.profile), name='profile'),
@@ -47,6 +47,7 @@ urlpatterns += [
     path('lab/<slug:slug>/delete/', views.LabDelete.as_view(), name='lab-delete'),
     path('djrichtextfield/', include('djrichtextfield.urls')),
     re_path(r'^favicon\.ico$', favicon_view),
+    path('likes/', login_required(views.like),  name='likes'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
