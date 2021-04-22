@@ -19,27 +19,29 @@ class RDBCASBackend(CASBackend):
 
         :returns: [User] The user object with updates to is_staff, email, first_name, last_name fields.
         """
-        url = "https://yalies.io/api/people"
-        querystring = {"query": user.username}
+        url = 'https://yalies.io/api/people'
+        payload = {
+            'filters': {
+                'netid': user.username,
+            }
+        }
         headers = {
-            'Authorization': f"Bearer {get_secret('YALIES_API')}",
+            'Authorization': 'Bearer ' + get_secret('YALIES_API'),
         }
 
         try:
-            response = requests.post(url, headers=headers, json=querystring)
+            response = requests.post(url, headers=headers, json=payload)
             response.raise_for_status()
             data = response.json()[0]
-            
+
             email = data['email']
             first_name = data['first_name']
             last_name = data['last_name']
             org = data['organization']
-            is_staff = False
-            if org is not None:
-                is_staff = True
+            is_staff = (org is not None)
 
             user.email = email
-            user.first_name = first_name 
+            user.first_name = first_name
             user.last_name = last_name
             user.is_staff = is_staff
         except HTTPError as http_err:
