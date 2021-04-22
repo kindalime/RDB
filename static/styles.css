@@ -519,3 +519,7 @@ table.dataTable.no-footer {
     margin-top: 0 !important;
   }
 }
+
+.like {
+  cursor: pointer !important;
+}
