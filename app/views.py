@@ -73,7 +73,7 @@ def random(request):
 
 def staff(request):
     if not request.user.is_superuser:
-        return self.handle_no_permission()
+        return HttpResponseRedirect("/")
     
     try:
         netid = request.GET.get("netid", None)
@@ -118,7 +118,10 @@ def email(request):
 
 class LabDetail(LoginRequiredMixin, DetailView):
     model = Lab
-    fields = '__all__'
+    fields = ('name', 'pi_name', 'department', 'work_remote', 
+                  'work_in_person', 'accept_undergrads', 'accept_grads', 
+                  'email', 'website', 'mentors', 'funded', 'project_desc', 
+                  'created_date', 'modified_date', 'slug', 'likes')
 
 class LabCreate(LoginRequiredMixin, CreateView):
     model = Lab

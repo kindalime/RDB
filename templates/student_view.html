@@ -192,6 +192,24 @@
                                         searching: false,
                                         order: [[1, 'desc']]
                                     }
+                            },
+                            {
+                                header: 'Profile',
+                                    options: [
+                                        {
+                                            label: 'Saved',
+                                                value: function(rowData, rowIdx) {
+                                                    var likes = rowData.likes;
+                                                    var user = parseInt("{{ request.user.id }}");
+                                                    return likes != null && likes.includes(user);
+                                            },
+                                            className: 'saved'
+                                        },
+                                    ],
+                                    dtOpts: {
+                                        searching: false,
+                                        order: [[1, 'desc']]
+                                    }
                             }
                         ]
                     },

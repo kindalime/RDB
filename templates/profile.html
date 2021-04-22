@@ -82,10 +82,10 @@
             {% endif %}
 
             {% if user.is_authenticated and not user.is_staff or user.is_staff and liked_labs %}
-                {% if labs %}
-                    <h1 class="text-sm-left text-center mt-0" style="margin-top: 1rem !important;">Liked Labs</h1>
+                {% if user.is_staff or labs %}
+                    <h1 class="text-sm-left text-center mt-0" style="margin-top: 1rem !important;">Saved Labs</h1>
                 {% else %}
-                    <h1 class="text-sm-left text-center mt-0">Liked Labs</h1>
+                    <h1 class="text-sm-left text-center mt-0">Saved Labs</h1>
                 {% endif %}
                 <div class = "table-responsive">
                     <table id="liked_labs" class="table table-hover table-striped table-bordered text-center" cellspacing="0" width="100%">
@@ -192,7 +192,7 @@
             searching: false,
             "bInfo" : false,
             "language": {
-                "emptyTable": "No likes to show"
+                "emptyTable": "No saved listings to show"
             }
         });
 

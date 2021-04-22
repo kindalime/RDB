@@ -8,7 +8,11 @@
     {% csrf_token %}
     <div class="mid-padding left d-flex flex-column">
         <div class="header2 d-flex row-to-col flex-row flex-wrap mt-3">
-            <p style="margin-bottom: 0 !important">{{ lab.name }}</p>
+            <p style="margin-bottom: 0 !important">
+                <button class="btn btn-primary hBack" type="button" style="margin-right: 1rem; background-color:#0f4d92; border-color:#0f4d92; height:35px; width:35px;">
+                    <i class="fas fa-chevron-left"></i>
+                </button>{{ lab.name }}{% if request.user in lab.likes.all %}<i name='{{ lab.slug }}' style="margin-left: 1rem;" class="fas fa-heart fa-sm like"></i></span>{% else %}<i name='{{ lab.slug }}' style="margin-left: 1rem;" class="far fa-heart fa-sm like"></i></span>{% endif %}
+            </p>            
         </div>
 
         <hr class="blue1" style = "width: 100%">
@@ -108,6 +112,36 @@
         }
 
         $(".lab-website").attr("href", url);
+
+        $(".hBack").on("click", function(e){
+            e.preventDefault();
+            window.history.back();
+        });
+
+        $(document).on('click', '.like', function() {
+            var lab_slug = $(this).attr('name');
+
+            if ($(this).hasClass("far")) {
+                $(this).removeClass("far").addClass('fas');
+            } else {
+                $(this).removeClass("fas").addClass('far');
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'likes' %}",
+                data: {
+                    'slug': lab_slug,
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success: likeCallback,
+                dataType: 'html'
+            });
+
+            function likeCallback(data, jqXHR) {
+
+            }  
+        });
     </script>
 
     </body>
