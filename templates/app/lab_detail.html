@@ -9,7 +9,7 @@
     <div class="mid-padding left d-flex flex-column">
         <div class="header2 d-flex row-to-col flex-row flex-wrap mt-3">
             <p style="margin-bottom: 0 !important">
-                <button class="btn btn-primary hBack" type="button" style="margin-right: 1rem; background-color:#0f4d92; border-color:#0f4d92; height:35px; width:35px;">
+                <button class="btn btn-primary hBack" type="button" style="margin-right: 1rem; background-color:#0f4d92; border-color:#0f4d92; height:40px; width:35px;">
                     <i class="fas fa-chevron-left"></i>
                 </button>{{ lab.name }}{% if request.user in lab.likes.all %}<i name='{{ lab.slug }}' style="margin-left: 1rem;" class="fas fa-heart fa-sm like"></i></span>{% else %}<i name='{{ lab.slug }}' style="margin-left: 1rem;" class="far fa-heart fa-sm like"></i></span>{% endif %}
             </p>            
