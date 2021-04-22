@@ -7,3 +7,4 @@ venv/
 *.sqlite3
 *.json
 migrations/
+.DS_Store
