@@ -30,7 +30,18 @@ To make sure you're using the correct python version and to promote best practic
 
 ## Windows Setup
 
-Not entirely sure at the moment, godspeed.
+1. Clone the repo
+`git clone https://github.com/DanielKim0/RDB.git`
+2. Change directories and create virtual python environment
+`cd RDB`
+3. Create virtual python environment
+`py -m venv .env`
+4. Source environment using a batch file
+`.env\scripts\activate.bat`
+5. Install requirements
+`pip install -r requirements.txt`
+6. Run server
+`py manage.py runserver`
  
 ## License
  
