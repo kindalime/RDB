@@ -34,12 +34,13 @@ To make sure you're using the correct python version and to promote best practic
 `git clone https://github.com/DanielKim0/RDB.git`
 2. Change directories and create virtual python environment
 `cd RDB`
+3. Create virtual python environment
 `py -m venv .env`
-3. Source environment using a batch file
+4. Source environment using a batch file
 `.env\scripts\activate.bat`
-4. Install requirements
+5. Install requirements
 `pip install -r requirements.txt`
-5. Run server
+6. Run server
 `py manage.py runserver`
  
 ## License
