@@ -32,7 +32,7 @@ To make sure you're using the correct python version and to promote best practic
 
 1. Clone the repo
 `git clone https://github.com/DanielKim0/RDB.git`
-2. Change directories and create virtual python environment
+2. Change directories
 `cd RDB`
 3. Create virtual python environment
 `py -m venv .env`
